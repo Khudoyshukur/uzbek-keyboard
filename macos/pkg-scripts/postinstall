@@ -9,4 +9,7 @@ if ! sudo -u "$user" defaults read com.apple.HIToolbox AppleEnabledInputSources 
 fi
 # A per-user copy from install.sh would show up twice
 rm -rf "/Users/$user/Library/Keyboard Layouts/UzbekKeyboard.bundle"
+# Stale layout cache makes System Settings list the layout several times
+c=$(sudo -u "$user" getconf DARWIN_USER_CACHE_DIR 2>/dev/null)
+[ -n "$c" ] && rm -rf "${c}com.apple.IntlDataCache.le" "${c}com.apple.IntlDataCache.le.kbdx" "${c}com.apple.Keyboard-Settings.extension"
 exit 0

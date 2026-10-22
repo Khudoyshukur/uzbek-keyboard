@@ -23,14 +23,23 @@ enable_layout() {
     say "Klaviaturani qölda qöşing: System Settings → Keyboard → Text Input → Edit… → + → Uzbek Latin"
     return
   fi
-  if ! grep -q "\"$LAYOUT_NAME\"" <<<"$current"; then
-    defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
-      "<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>$LAYOUT_ID</integer><key>KeyboardLayout Name</key><string>$LAYOUT_NAME</string></dict>"
-  fi
+  # Drop any old entries first so reinstalling never leaves duplicates.
+  remove_entries
+  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+    "<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>$LAYOUT_ID</integer><key>KeyboardLayout Name</key><string>$LAYOUT_NAME</string></dict>"
   ok "Klaviaturalar röyxatiga qöşildi"
 }
 
-disable_layout() {
+# macOS caches the list of layouts; a stale cache shows the layout many times
+# in System Settings after a reinstall. It is rebuilt automatically at login.
+clear_cache() {
+  local c
+  c=$(getconf DARWIN_USER_CACHE_DIR 2>/dev/null) || return 0
+  rm -f "${c}com.apple.IntlDataCache.le" "${c}com.apple.IntlDataCache.le.kbdx"
+  rm -rf "${c}com.apple.Keyboard-Settings.extension"
+}
+
+remove_entries() {
   local f key i
   f=$(mktemp)
   defaults export com.apple.HIToolbox "$f" 2>/dev/null || { rm -f "$f"; return; }
@@ -46,6 +55,10 @@ disable_layout() {
   done
   defaults import com.apple.HIToolbox "$f"
   rm -f "$f"
+}
+
+disable_layout() {
+  remove_entries
   ok "Klaviaturalar röyxatidan olib taşlandi"
 }
 
@@ -75,6 +88,7 @@ if [ "${1:-}" = "--uninstall" ]; then
   disable_layout
   rm -rf "$USER_DIR/$BUNDLE" && ok "Öçirildi: $USER_DIR/$BUNDLE"
   remove_system_copy
+  clear_cache
   offer_logout
   exit 0
 fi
@@ -100,6 +114,7 @@ xattr -dr com.apple.quarantine "$USER_DIR/$BUNDLE" 2>/dev/null || true
 ok "Örnatildi: $USER_DIR/$BUNDLE"
 remove_system_copy
 enable_layout
+clear_cache
 
 cat <<'EOF'
 
