@@ -63,6 +63,8 @@ check(mac_out(3, 0) == "å", "mac ⌥a should stay å")
 for i in range(7):
     check(len(maps[i]) >= 70, "mac map %d looks incomplete" % i)
 
+check(os.path.exists(os.path.join(RES, "Uzbek Keyboard.icns")), "mac icon missing (run: swift tools/make_icon.swift)")
+
 # --- Windows ---------------------------------------------------------------
 klc_raw = open(os.path.join(ROOT, "windows/UzbekKeyboard.klc"), "rb").read()
 check(klc_raw[:2] == b"\xff\xfe", "klc must be UTF-16 LE with BOM")

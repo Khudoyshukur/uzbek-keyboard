@@ -9,13 +9,15 @@
 	<key>CFBundleName</key>
 	<string>Uzbek Keyboard</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>KLInfo_Uzbek Keyboard</key>
 	<dict>
 		<key>TISInputSourceID</key>
-		<string>io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard</string>
+		<string>io.github.khudoyshukur.keyboardlayout.uzbek.keylayout.UzbekKeyboard</string>
+		<key>TISIconIsTemplate</key>
+		<true/>
 		<key>TISIntendedLanguage</key>
 		<string>uz-Latn</string>
 	</dict>

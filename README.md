@@ -110,6 +110,7 @@ AltGr is the **Right Alt** key. To uninstall, run `./install.sh --uninstall` (ad
 
 ```
 tools/generate.py   single source of truth: generates every layout file below
+tools/make_icon.swift  draws the macOS menu-bar icon (Uzbek Keyboard.icns)
 tests/              checks for the generated files
 macos/              UzbekKeyboard.bundle (Info.plist + .keylayout + names), build/install scripts
 windows/            UzbekKeyboard.klc, build.ps1 (kbdutool), install/uninstall scripts

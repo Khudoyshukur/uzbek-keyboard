@@ -235,7 +235,9 @@ def info_plist():
 	<key>KLInfo_{name}</key>
 	<dict>
 		<key>TISInputSourceID</key>
-		<string>{bid}.uzbekkeyboard</string>
+		<string>{bid}.keylayout.UzbekKeyboard</string>
+		<key>TISIconIsTemplate</key>
+		<true/>
 		<key>TISIntendedLanguage</key>
 		<string>uz-Latn</string>
 	</dict>
