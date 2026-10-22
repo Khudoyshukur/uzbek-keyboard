@@ -43,11 +43,6 @@ Batafsil yöriqnoma, boşqa usullar va **öçiriş**: [macOS](docs/macos.md) · 
 
 Fayllarni qölda yuklab olmoqçi bölsangiz: [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest)
 
-## Telefonlar
-
-Android va iPhone ekran klaviaturasini bunday fayl bilan özgartirib bölmaydi, buning uçun alohida ilova kerak.
-Hozirça Gboard yoki iPhone klaviaturasida **o, g, s, c** harfini bosib turing, ö ğ ş ç çiqadi.
-
 ## Loyihaga hissa qöşiş
 
 [docs/development.md](docs/development.md)
