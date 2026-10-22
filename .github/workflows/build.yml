@@ -26,10 +26,19 @@ jobs:
           if pkgutil --payload-files dist/*.pkg | grep '/\._'; then exit 1; fi
       - name: install.sh / --uninstall smoke test
         run: |
-          # Third-party layouts are enabled in com.apple.inputsources (via the TIS API);
-          # an entry in com.apple.HIToolbox is what used to cause duplicates.
-          enabled() { defaults read com.apple.inputsources AppleEnabledThirdPartyInputSources 2>/dev/null | grep -c '"Uzbek Keyboard"' || true; }
+          # Ask the input-source service how many Uzbek Latin sources are enabled.
+          enabled() {
+            osascript -l JavaScript -e 'ObjC.import("Carbon");
+              ObjC.bindFunction("TISCreateInputSourceList", ["void *", ["id", "bool"]]);
+              ObjC.bindFunction("CFArrayGetCount", ["long", ["void *"]]);
+              var l = $.TISCreateInputSourceList($.NSDictionary.dictionaryWithObjectForKey(
+                "io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard", "TISPropertyInputSourceID"), false);
+              String(l ? $.CFArrayGetCount(l) : 0)'
+          }
+          # An entry in com.apple.HIToolbox is what used to cause duplicates.
           in_hitoolbox() { defaults read com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null | grep -c '"Uzbek Keyboard"' || true; }
+          debug() { sw_vers; echo "enabled=$(enabled)"; defaults read com.apple.inputsources 2>&1; defaults read com.apple.HIToolbox AppleEnabledInputSources 2>&1; }
+          trap 'debug' ERR
           ./macos/install.sh </dev/null
           test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Info.plist"
           test "$(enabled)" = 1
@@ -129,7 +138,12 @@ jobs:
         run: |
           curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash
           test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Resources/Uzbek Keyboard.icns"
-          defaults read com.apple.inputsources AppleEnabledThirdPartyInputSources | grep -q '"Uzbek Keyboard"'
+          osascript -l JavaScript -e 'ObjC.import("Carbon");
+            ObjC.bindFunction("TISCreateInputSourceList", ["void *", ["id", "bool"]]);
+            ObjC.bindFunction("CFArrayGetCount", ["long", ["void *"]]);
+            var l = $.TISCreateInputSourceList($.NSDictionary.dictionaryWithObjectForKey(
+              "io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard", "TISPropertyInputSourceID"), false);
+            String(l ? $.CFArrayGetCount(l) : 0)' | grep -qx 1
           curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash -s -- --uninstall
           test ! -e "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle"
       - name: Windows one-liner
