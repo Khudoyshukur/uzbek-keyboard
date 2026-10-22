@@ -1,0 +1,92 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Generated files are up to date
+        run: python3 tools/generate.py --check
+      - name: Layout checks (incl. Apple DTD validation)
+        run: python3 tests/check_layouts.py
+      - name: Build .zip and .pkg
+        run: ./macos/build.sh
+      - name: No macOS metadata files in the package
+        run: |
+          if pkgutil --payload-files dist/*.pkg | grep '/\._'; then exit 1; fi
+      - uses: actions/upload-artifact@v5
+        with:
+          name: macos
+          path: dist/*
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build DLLs with kbdutool
+        shell: pwsh
+        run: ./windows/build.ps1
+      - name: Install / uninstall smoke test
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Get-ChildItem dist\*.zip | Select-Object -First 1
+          Expand-Archive $zip.FullName -DestinationPath $env:TEMP\uzk
+          $dir = Get-ChildItem $env:TEMP\uzk -Directory | Select-Object -First 1
+          & "$($dir.FullName)\install.ps1" -Quiet
+          if (-not (Test-Path "$env:SystemRoot\System32\uzbekkb.dll")) { throw 'DLL not installed' }
+          $reg = Get-ChildItem 'HKLM:\SYSTEM\CurrentControlSet\Control\Keyboard Layouts' | Where-Object { (Get-ItemProperty $_.PSPath).'Layout File' -eq 'uzbekkb.dll' }
+          if (-not $reg) { throw 'layout not registered' }
+          Get-ItemProperty $reg.PSPath | Format-List
+          Get-WinUserLanguageList | Format-List LanguageTag, InputMethodTips
+          & "$($dir.FullName)\uninstall.ps1" -Quiet
+      - uses: actions/upload-artifact@v5
+        with:
+          name: windows
+          path: dist/*
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile keymap with libxkbcommon
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxkbcommon-tools
+          xkbcli compile-keymap --include "$PWD/linux/xkb" --include-defaults --layout uzbekkb > keymap.txt
+          for sym in odiaeresis Odiaeresis gbreve Gbreve scedilla Scedilla ccedilla Ccedilla U02BC; do
+            grep -q "$sym" keymap.txt || { echo "missing $sym"; exit 1; }
+          done
+      - name: Package
+        run: |
+          VERSION=$(cat VERSION)
+          mkdir -p dist "stage/UzbekKeyboard-Linux-$VERSION"
+          cp -R linux/xkb linux/install.sh LICENSE "stage/UzbekKeyboard-Linux-$VERSION/"
+          tar -C stage -czf "dist/UzbekKeyboard-Linux-$VERSION.tar.gz" "UzbekKeyboard-Linux-$VERSION"
+      - uses: actions/upload-artifact@v5
+        with:
+          name: linux
+          path: dist/*
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [macos, windows, linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes
