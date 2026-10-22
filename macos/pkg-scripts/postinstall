@@ -1,0 +1,12 @@
+#!/bin/bash
+# Runs as root after the .pkg installs. Adds the layout to the logged-in user's
+# input sources so it shows in the fn/🌐 switcher after the next login.
+user=$(stat -f %Su /dev/console)
+{ [ -z "$user" ] || [ "$user" = root ]; } && exit 0
+if ! sudo -u "$user" defaults read com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null | grep -q '"Uzbek Keyboard"'; then
+  sudo -u "$user" defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+    '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>-19443</integer><key>KeyboardLayout Name</key><string>Uzbek Keyboard</string></dict>'
+fi
+# A per-user copy from install.sh would show up twice
+rm -rf "/Users/$user/Library/Keyboard Layouts/UzbekKeyboard.bundle"
+exit 0

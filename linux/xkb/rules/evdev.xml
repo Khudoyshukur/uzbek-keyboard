@@ -7,7 +7,7 @@
       <configItem>
         <name>uzbekkb</name>
         <shortDescription>uz</shortDescription>
-        <description>Uzbek Keyboard (Özbekça klaviatura)</description>
+        <description>Uzbek Latin (Özbekça klaviatura)</description>
         <languageList>
           <iso639Id>uzb</iso639Id>
         </languageList>

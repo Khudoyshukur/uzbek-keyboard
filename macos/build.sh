@@ -14,8 +14,8 @@ trap 'rm -rf "$STAGE"' EXIT
 cp -R macos/UzbekKeyboard.bundle "$STAGE/"
 
 # Zip for manual install (drag into ~/Library/Keyboard Layouts)
-(cd "$STAGE" && ditto -c -k --norsrc --noextattr --keepParent UzbekKeyboard.bundle "UzbekKeyboard-macOS-$VERSION.zip")
-mv "$STAGE/UzbekKeyboard-macOS-$VERSION.zip" "$OUT/"
+(cd "$STAGE" && ditto -c -k --norsrc --noextattr --keepParent UzbekKeyboard.bundle UzbekKeyboard-macOS.zip)
+mv "$STAGE/UzbekKeyboard-macOS.zip" "$OUT/"
 
 # Installer package -> /Library/Keyboard Layouts (all users)
 ROOT_DIR="$STAGE/root"
@@ -29,6 +29,7 @@ pkgbuild --quiet \
   --identifier "$BUNDLE_ID" \
   --version "$VERSION" \
   --install-location "/Library/Keyboard Layouts" \
-  "$OUT/UzbekKeyboard-macOS-$VERSION.pkg"
+  --scripts macos/pkg-scripts \
+  "$OUT/UzbekKeyboard-macOS.pkg"
 
 ls -l "$OUT"

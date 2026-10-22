@@ -1,4 +1,4 @@
-# Removes the Uzbek Keyboard layout.
+﻿# Removes the Uzbek Latin layout.
 param([switch]$Quiet)
 $ErrorActionPreference = 'Stop'
 $Dll  = 'uzbekkb.dll'
@@ -23,17 +23,17 @@ foreach ($k in $keys) {
         $empty = @($list | Where-Object { $_.InputMethodTips.Count -eq 0 })
         foreach ($l in $empty) { [void]$list.Remove($l) }
         Set-WinUserLanguageList $list -Force
-    } catch { Write-Warning "Could not update your language list: $_" }
+    } catch { Write-Warning "Tillar röyxatini yangilab bölmadi: $_" }
     Remove-Item $k.PSPath -Recurse -Force
-    Write-Host "Unregistered $klid"
+    Write-Host "Röyxatdan öçirildi: $klid"
 }
 
 $sys32 = if ([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess) { "$env:SystemRoot\Sysnative" } else { "$env:SystemRoot\System32" }
 foreach ($f in "$sys32\$Dll", "$env:SystemRoot\SysWOW64\$Dll") {
     if (Test-Path $f) {
-        try { Remove-Item $f -Force; Write-Host "Deleted $f" }
-        catch { Write-Warning "$f is in use; it will be harmless, or delete it after a restart." }
+        try { Remove-Item $f -Force; Write-Host "Öçirildi: $f" }
+        catch { Write-Warning "$f hozir band; kompyuter qayta yoqilgandan söng öçirib taşlang (zararsiz)." }
     }
 }
-Write-Host 'Done. Sign out and back in to finish.'
-if (-not $Quiet) { Read-Host 'Press Enter to close' }
+Write-Host 'Tayyor. Tugatiş uçun tizimdan çiqib qayta kiring.'
+if (-not $Quiet) { Read-Host 'Yopiş uçun Enter bosing' }

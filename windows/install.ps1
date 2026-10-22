@@ -1,10 +1,10 @@
-# Installs the Uzbek Keyboard layout (uzbekkb.dll) for all users and adds it
+﻿# Installs the Uzbek Latin layout (uzbekkb.dll) for all users and adds it
 # to the current user's language list. Re-running it is safe.
 param([switch]$Quiet)
 $ErrorActionPreference = 'Stop'
 
 $Dll        = 'uzbekkb.dll'
-$LayoutText = 'Uzbek Keyboard'
+$LayoutText = 'Uzbek Latin'
 $Lcid       = '0443'      # Uzbek (Latin, Uzbekistan)
 $LangTag    = 'uz-Latn'
 $Root       = 'HKLM:\SYSTEM\CurrentControlSet\Control\Keyboard Layouts'
@@ -19,7 +19,7 @@ if (-not $isAdmin) {
 try {
     # 1. Copy the DLLs into the system folders
     $arch = if ($env:PROCESSOR_ARCHITEW6432) { $env:PROCESSOR_ARCHITEW6432 } else { $env:PROCESSOR_ARCHITECTURE }
-    if ($arch -eq 'ARM64') { throw 'Windows on ARM is not supported yet (Microsoft''s kbdutool cannot build ARM64 layouts).' }
+    if ($arch -eq 'ARM64') { throw 'Windows on ARM hozirça qöllab-quvvatlanmaydi.' }
     # A 32-bit PowerShell on 64-bit Windows sees SysWOW64 as System32; Sysnative is the real one.
     $sys32 = if ([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess) { "$env:SystemRoot\Sysnative" } else { "$env:SystemRoot\System32" }
     if ([Environment]::Is64BitOperatingSystem) {
@@ -40,7 +40,7 @@ try {
             $candidate = "${p}000$Lcid"
             if (-not ($all | Where-Object { $_.Id -eq $candidate })) { $klid = $candidate; break }
         }
-        if (-not $klid) { throw 'No free keyboard layout ID found.' }
+        if (-not $klid) { throw 'Böş klaviatura ID topilmadi.' }
         $used = $all | ForEach-Object { $_.Props.'Layout Id' } | Where-Object { $_ } | ForEach-Object { [Convert]::ToInt32($_, 16) }
         $max = ($used | Measure-Object -Maximum).Maximum
         $layoutId = '{0:x4}' -f ([int]$max + 1)
@@ -51,7 +51,7 @@ try {
     New-ItemProperty -Path $path -Name 'Layout File' -Value $Dll -PropertyType String -Force | Out-Null
     New-ItemProperty -Path $path -Name 'Layout Text' -Value $LayoutText -PropertyType String -Force | Out-Null
     New-ItemProperty -Path $path -Name 'Layout Display Name' -Value "@%SystemRoot%\system32\$Dll,-1000" -PropertyType String -Force | Out-Null
-    Write-Host "Registered layout $klid ($LayoutText)"
+    Write-Host "Örnatildi: $LayoutText ($klid)"
 
     # 3. Add it to this user's input methods
     $tip = "${Lcid}:$($klid.ToUpper())"
@@ -65,15 +65,15 @@ try {
         }
         if ($lang.InputMethodTips -notcontains $tip) { $lang.InputMethodTips.Add($tip) }
         Set-WinUserLanguageList $list -Force
-        Write-Host "Added to your languages. Switch with Win+Space."
+        Write-Host "Tillar röyxatiga qöşildi. Win + Space bilan almaşing."
     } catch {
-        Write-Warning "Installed, but could not add it to your language list automatically: $_"
-        Write-Warning "Add it in Settings > Time & language > Language & region > Uzbek (Latin) > Keyboards."
+        Write-Warning "Örnatildi, lekin tillar röyxatiga avtomatik qöşib bölmadi: $_"
+        Write-Warning "Qölda qöşing: Settings > Time & language > Language & region > Uzbek (Latin) > Keyboards."
     }
-    Write-Host 'Done. If the layout does not show up right away, sign out and back in.'
+    Write-Host 'Tayyor! Agar klaviatura darhol körinmasa, tizimdan çiqib qayta kiring.'
 } catch {
     Write-Error $_
-    if (-not $Quiet) { Read-Host 'Press Enter to close' }
+    if (-not $Quiet) { Read-Host 'Yopiş uçun Enter bosing' }
     exit 1
 }
-if (-not $Quiet) { Read-Host 'Press Enter to close' }
+if (-not $Quiet) { Read-Host 'Yopiş uçun Enter bosing' }

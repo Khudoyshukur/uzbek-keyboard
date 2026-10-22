@@ -7,7 +7,7 @@ $version = (Get-Content "$repo\VERSION").Trim()
 $klc     = "$PSScriptRoot\UzbekKeyboard.klc"
 $work    = Join-Path $env:TEMP 'uzbek-keyboard-build'
 $out     = "$repo\dist"
-$pkgName = "UzbekKeyboard-Windows-$version"
+$pkgName = "UzbekKeyboard-Windows"
 $pkg     = Join-Path $work $pkgName
 
 Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue

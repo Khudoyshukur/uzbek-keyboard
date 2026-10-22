@@ -24,6 +24,16 @@ jobs:
       - name: No macOS metadata files in the package
         run: |
           if pkgutil --payload-files dist/*.pkg | grep '/\._'; then exit 1; fi
+      - name: install.sh / --uninstall smoke test
+        run: |
+          ./macos/install.sh </dev/null
+          test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Info.plist"
+          defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
+          ./macos/install.sh </dev/null   # running twice must not add a duplicate
+          test "$(defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -c '"Uzbek Keyboard"')" = 1
+          ./macos/install.sh --uninstall </dev/null
+          test ! -e "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle"
+          ! defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
       - uses: actions/upload-artifact@v7
         with:
           name: macos
@@ -67,12 +77,19 @@ jobs:
           for sym in odiaeresis Odiaeresis gbreve Gbreve scedilla Scedilla ccedilla Ccedilla U02BC; do
             grep -q "$sym" keymap.txt || { echo "missing $sym"; exit 1; }
           done
+      - name: install.sh / --uninstall smoke test
+        run: |
+          export XDG_CONFIG_HOME=$(mktemp -d)
+          sh linux/install.sh
+          test -f "$XDG_CONFIG_HOME/xkb/symbols/uzbekkb"
+          xkbcli compile-keymap --layout uzbekkb | grep -q odiaeresis
+          sh linux/install.sh --uninstall
+          test ! -e "$XDG_CONFIG_HOME/xkb/symbols/uzbekkb"
       - name: Package
         run: |
-          VERSION=$(cat VERSION)
-          mkdir -p dist "stage/UzbekKeyboard-Linux-$VERSION"
-          cp -R linux/xkb linux/install.sh LICENSE "stage/UzbekKeyboard-Linux-$VERSION/"
-          tar -C stage -czf "dist/UzbekKeyboard-Linux-$VERSION.tar.gz" "UzbekKeyboard-Linux-$VERSION"
+          mkdir -p dist stage/UzbekKeyboard-Linux
+          cp -R linux/xkb linux/install.sh LICENSE stage/UzbekKeyboard-Linux/
+          tar -C stage -czf dist/UzbekKeyboard-Linux.tar.gz UzbekKeyboard-Linux
       - uses: actions/upload-artifact@v7
         with:
           name: linux
@@ -91,3 +108,40 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes
+
+  # Runs the exact one-line commands from the README against the new release.
+  verify-release:
+    needs: release
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: macOS one-liner
+        if: runner.os == 'macOS'
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash
+          test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Resources/Uzbek Keyboard.icns"
+          defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
+          curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash -s -- --uninstall
+          test ! -e "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle"
+      - name: Windows one-liner
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $u = "https://raw.githubusercontent.com/$env:GITHUB_REPOSITORY/$env:GITHUB_SHA/windows/get.ps1"
+          irm $u | iex
+          if (-not (Test-Path "$env:SystemRoot\System32\uzbekkb.dll")) { throw 'not installed' }
+          Get-WinUserLanguageList | Format-List LanguageTag, InputMethodTips
+          & ([scriptblock]::Create((irm $u))) -Uninstall
+          if (Test-Path "$env:SystemRoot\System32\uzbekkb.dll") { throw 'not removed' }
+      - name: Linux one-liner
+        if: runner.os == 'Linux'
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/linux/install.sh" | sh
+          test -f "$HOME/.config/xkb/symbols/uzbekkb"
+          curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/linux/install.sh" | sh -s -- --uninstall
+          test ! -e "$HOME/.config/xkb/symbols/uzbekkb"
