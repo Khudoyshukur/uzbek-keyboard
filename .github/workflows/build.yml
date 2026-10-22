@@ -26,14 +26,19 @@ jobs:
           if pkgutil --payload-files dist/*.pkg | grep '/\._'; then exit 1; fi
       - name: install.sh / --uninstall smoke test
         run: |
+          # Third-party layouts are enabled in com.apple.inputsources (via the TIS API);
+          # an entry in com.apple.HIToolbox is what used to cause duplicates.
+          enabled() { defaults read com.apple.inputsources AppleEnabledThirdPartyInputSources 2>/dev/null | grep -c '"Uzbek Keyboard"' || true; }
+          in_hitoolbox() { defaults read com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null | grep -c '"Uzbek Keyboard"' || true; }
           ./macos/install.sh </dev/null
           test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Info.plist"
-          defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
+          test "$(enabled)" = 1
           ./macos/install.sh </dev/null   # running twice must not add a duplicate
-          test "$(defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -c '"Uzbek Keyboard"')" = 1
+          test "$(enabled)" = 1
+          test "$(in_hitoolbox)" = 0
           ./macos/install.sh --uninstall </dev/null
           test ! -e "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle"
-          ! defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
+          test "$(enabled)" = 0
       - uses: actions/upload-artifact@v7
         with:
           name: macos
@@ -124,7 +129,7 @@ jobs:
         run: |
           curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash
           test -f "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle/Contents/Resources/Uzbek Keyboard.icns"
-          defaults read com.apple.HIToolbox AppleEnabledInputSources | grep -q '"Uzbek Keyboard"'
+          defaults read com.apple.inputsources AppleEnabledThirdPartyInputSources | grep -q '"Uzbek Keyboard"'
           curl -fsSL "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/macos/install.sh" | bash -s -- --uninstall
           test ! -e "$HOME/Library/Keyboard Layouts/UzbekKeyboard.bundle"
       - name: Windows one-liner
