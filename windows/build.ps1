@@ -20,8 +20,12 @@ if (-not $kbdutool) {
     $exe = Join-Path $work 'MSKLC.exe'
     Invoke-WebRequest 'https://download.microsoft.com/download/6/f/5/6f5ce43a-e892-4fd1-b9a6-1a0cbb64e6e2/MSKLC.exe' -OutFile $exe
     $extract = Join-Path $work 'msklc'
-    Start-Process $exe -ArgumentList "/Q /T:`"$extract`" /C" -Wait
+    # MSKLC.exe is a self-extracting archive (MSKLC\MSKLC.msi + setup.exe); Windows' bsdtar opens it
+    New-Item -ItemType Directory -Force $extract | Out-Null
+    & "$env:SystemRoot\System32\tar.exe" -xf $exe -C $extract
+    if ($LASTEXITCODE -ne 0) { throw "could not unpack MSKLC.exe (exit $LASTEXITCODE)" }
     $msi = Get-ChildItem $extract -Filter *.msi -Recurse | Select-Object -First 1
+    if (-not $msi) { throw 'MSKLC.msi not found in download' }
     # Administrative install just unpacks the files (no .NET 2.0 prerequisite check)
     $files = Join-Path $work 'msklc-files'
     Start-Process msiexec.exe -ArgumentList "/a `"$($msi.FullName)`" /qn TARGETDIR=`"$files`"" -Wait
