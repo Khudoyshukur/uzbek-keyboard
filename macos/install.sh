@@ -6,59 +6,59 @@ set -euo pipefail
 
 REPO="khudoyshukur/uzbek-keyboard"
 BUNDLE="UzbekKeyboard.bundle"
-LAYOUT_NAME="Uzbek Keyboard"   # internal name from the .keylayout; users see "Uzbek Latin"
-LAYOUT_ID=-19443
 USER_DIR="$HOME/Library/Keyboard Layouts"
 SYS_DIR="/Library/Keyboard Layouts"
 
 say()  { printf '\033[1m%s\033[0m\n' "$*"; }
 ok()   { printf '\033[32m✓\033[0m %s\n' "$*"; }
 
-# Add the layout to the user's enabled input sources, so it is in the fn/🌐
-# switcher right after the next login (macOS only loads new layouts at login).
+SOURCE_ID="io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard"
+
+# Talk to macOS's input-source service (the same API System Settings uses).
+# Writing com.apple.HIToolbox prefs directly gets out of sync with the running
+# service and makes System Settings list the layout many times.
+#   tis register <bundle path> | tis enable | tis disable
+tis() {
+  osascript -l JavaScript - "$@" <<'JS'
+function run(argv) {
+  ObjC.import("Carbon");
+  ObjC.bindFunction("TISCreateInputSourceList", ["void *", ["id", "bool"]]);
+  ObjC.bindFunction("TISRegisterInputSource", ["int", ["id"]]);
+  ObjC.bindFunction("TISEnableInputSource", ["int", ["void *"]]);
+  ObjC.bindFunction("TISDisableInputSource", ["int", ["void *"]]);
+  ObjC.bindFunction("CFArrayGetCount", ["long", ["void *"]]);
+  ObjC.bindFunction("CFArrayGetValueAtIndex", ["void *", ["void *", "long"]]);
+  var action = argv[0];
+  if (action === "register") return String($.TISRegisterInputSource($.NSURL.fileURLWithPath(argv[1])));
+  function find(all) {
+    var l = $.TISCreateInputSourceList(
+      $.NSDictionary.dictionaryWithObjectForKey(argv[1], "TISPropertyInputSourceID"), all);
+    var out = [];
+    if (l) for (var i = 0, n = $.CFArrayGetCount(l); i < n; i++) out.push($.CFArrayGetValueAtIndex(l, i));
+    return out;
+  }
+  var on = find(false);  // only enabled sources
+  if (action === "enable" && on.length === 0) {
+    var all = find(true);
+    if (all.length) $.TISEnableInputSource(all[0]);
+  }
+  if (action === "disable") on.forEach(function (x) { $.TISDisableInputSource(x); });
+  return String(find(false).length);  // how many are enabled now
+}
+JS
+}
+
 enable_layout() {
-  local current
-  current=$(defaults read com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null || true)
-  if [ -z "$current" ]; then
+  tis register "$USER_DIR/$BUNDLE" >/dev/null 2>&1 || true
+  if [ "$(tis enable "$SOURCE_ID" 2>/dev/null)" != 0 ]; then
+    ok "Klaviaturalar röyxatiga qöşildi"
+  else
     say "Klaviaturani qölda qöşing: System Settings → Keyboard → Text Input → Edit… → + → Uzbek Latin"
-    return
   fi
-  # Drop any old entries first so reinstalling never leaves duplicates.
-  remove_entries
-  defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
-    "<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>$LAYOUT_ID</integer><key>KeyboardLayout Name</key><string>$LAYOUT_NAME</string></dict>"
-  ok "Klaviaturalar röyxatiga qöşildi"
-}
-
-# macOS caches the list of layouts; a stale cache shows the layout many times
-# in System Settings after a reinstall. It is rebuilt automatically at login.
-clear_cache() {
-  local c
-  c=$(getconf DARWIN_USER_CACHE_DIR 2>/dev/null) || return 0
-  rm -f "${c}com.apple.IntlDataCache.le" "${c}com.apple.IntlDataCache.le.kbdx"
-  rm -rf "${c}com.apple.Keyboard-Settings.extension"
-}
-
-remove_entries() {
-  local f key i
-  f=$(mktemp)
-  defaults export com.apple.HIToolbox "$f" 2>/dev/null || { rm -f "$f"; return; }
-  for key in AppleEnabledInputSources AppleSelectedInputSources AppleInputSourceHistory; do
-    i=0
-    while /usr/libexec/PlistBuddy -c "Print :$key:$i" "$f" >/dev/null 2>&1; do
-      if [ "$(/usr/libexec/PlistBuddy -c "Print :$key:$i:KeyboardLayout\ Name" "$f" 2>/dev/null)" = "$LAYOUT_NAME" ]; then
-        /usr/libexec/PlistBuddy -c "Delete :$key:$i" "$f"
-      else
-        i=$((i + 1))
-      fi
-    done
-  done
-  defaults import com.apple.HIToolbox "$f"
-  rm -f "$f"
 }
 
 disable_layout() {
-  remove_entries
+  tis disable "$SOURCE_ID" >/dev/null 2>&1 || true
   ok "Klaviaturalar röyxatidan olib taşlandi"
 }
 
@@ -88,7 +88,6 @@ if [ "${1:-}" = "--uninstall" ]; then
   disable_layout
   rm -rf "$USER_DIR/$BUNDLE" && ok "Öçirildi: $USER_DIR/$BUNDLE"
   remove_system_copy
-  clear_cache
   offer_logout
   exit 0
 fi
@@ -114,7 +113,6 @@ xattr -dr com.apple.quarantine "$USER_DIR/$BUNDLE" 2>/dev/null || true
 ok "Örnatildi: $USER_DIR/$BUNDLE"
 remove_system_copy
 enable_layout
-clear_cache
 
 cat <<'EOF'
 

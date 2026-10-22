@@ -1,15 +1,42 @@
 #!/bin/bash
-# Runs as root after the .pkg installs. Adds the layout to the logged-in user's
-# input sources so it shows in the fn/🌐 switcher after the next login.
+# Runs as root after the .pkg installs. Enables the layout for the logged-in
+# user through macOS's input-source API (as System Settings does), so it shows
+# in the fn/🌐 switcher. Writing com.apple.HIToolbox prefs directly instead
+# makes System Settings list the layout many times.
 user=$(stat -f %Su /dev/console)
 { [ -z "$user" ] || [ "$user" = root ]; } && exit 0
-if ! sudo -u "$user" defaults read com.apple.HIToolbox AppleEnabledInputSources 2>/dev/null | grep -q '"Uzbek Keyboard"'; then
-  sudo -u "$user" defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
-    '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>-19443</integer><key>KeyboardLayout Name</key><string>Uzbek Keyboard</string></dict>'
-fi
+uid=$(id -u "$user")
 # A per-user copy from install.sh would show up twice
 rm -rf "/Users/$user/Library/Keyboard Layouts/UzbekKeyboard.bundle"
-# Stale layout cache makes System Settings list the layout several times
-c=$(sudo -u "$user" getconf DARWIN_USER_CACHE_DIR 2>/dev/null)
-[ -n "$c" ] && rm -rf "${c}com.apple.IntlDataCache.le" "${c}com.apple.IntlDataCache.le.kbdx" "${c}com.apple.Keyboard-Settings.extension"
+tis() {
+  launchctl asuser "$uid" sudo -u "$user" osascript -l JavaScript - "$@" <<'JS'
+function run(argv) {
+  ObjC.import("Carbon");
+  ObjC.bindFunction("TISCreateInputSourceList", ["void *", ["id", "bool"]]);
+  ObjC.bindFunction("TISRegisterInputSource", ["int", ["id"]]);
+  ObjC.bindFunction("TISEnableInputSource", ["int", ["void *"]]);
+  ObjC.bindFunction("TISDisableInputSource", ["int", ["void *"]]);
+  ObjC.bindFunction("CFArrayGetCount", ["long", ["void *"]]);
+  ObjC.bindFunction("CFArrayGetValueAtIndex", ["void *", ["void *", "long"]]);
+  var action = argv[0];
+  if (action === "register") return String($.TISRegisterInputSource($.NSURL.fileURLWithPath(argv[1])));
+  function find(all) {
+    var l = $.TISCreateInputSourceList(
+      $.NSDictionary.dictionaryWithObjectForKey(argv[1], "TISPropertyInputSourceID"), all);
+    var out = [];
+    if (l) for (var i = 0, n = $.CFArrayGetCount(l); i < n; i++) out.push($.CFArrayGetValueAtIndex(l, i));
+    return out;
+  }
+  var on = find(false);  // only enabled sources
+  if (action === "enable" && on.length === 0) {
+    var all = find(true);
+    if (all.length) $.TISEnableInputSource(all[0]);
+  }
+  if (action === "disable") on.forEach(function (x) { $.TISDisableInputSource(x); });
+  return String(find(false).length);  // how many are enabled now
+}
+JS
+}
+tis register "/Library/Keyboard Layouts/UzbekKeyboard.bundle" >/dev/null 2>&1 || true
+tis enable io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard >/dev/null 2>&1 || true
 exit 0
