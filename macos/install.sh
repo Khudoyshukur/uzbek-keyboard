@@ -50,7 +50,9 @@ JS
 
 enable_layout() {
   tis register "$USER_DIR/$BUNDLE" >/dev/null 2>&1 || true
-  if [ "$(tis enable "$SOURCE_ID" 2>/dev/null)" != 0 ]; then
+  local n
+  n=$(tis enable "$SOURCE_ID" 2>/dev/null || true)
+  if [[ "$n" =~ ^[1-9][0-9]*$ ]]; then
     ok "Klaviaturalar röyxatiga qöşildi"
   else
     say "Klaviaturani qölda qöşing: System Settings → Keyboard → Text Input → Edit… → + → Uzbek Latin"
