@@ -11,7 +11,7 @@ It's standard US QWERTY. Hold **Option ⌥** (macOS) or **AltGr / Right Alt** (W
 | Windows (PowerShell) | `irm https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/windows/get.ps1 \| iex` |
 | Linux | `curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/linux/install.sh \| sh` |
 
-Each command downloads the latest release, installs it, and enables it. Afterwards, log out and back in on macOS and Linux.
+Each command downloads the latest release, installs it, and enables it. Afterwards, log out and back in on Linux.
 To remove it, add `--uninstall`; on Windows, add `-Uninstall`. The [install guides](docs/) (in Uzbek) have the exact commands.
 You can also download the files directly from [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest).
 

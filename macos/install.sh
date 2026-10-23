@@ -72,25 +72,11 @@ remove_system_copy() {
   fi
 }
 
-offer_logout() {
-  printf '\nÖzgarişlar kuçga kiriši uçun tizimdan çiqib, qayta kiriş kerak.\nHozir çiqasizmi? [ha/yöq]: '
-  local ans=""
-  read -r ans </dev/tty 2>/dev/null || true
-  case "$ans" in
-    h|H|ha|Ha|HA|y|Y|yes)
-      osascript -e 'tell application "System Events" to log out' >/dev/null 2>&1 \
-        || say "Apple menyusi  → Log Out orqali çiqing." ;;
-    *)
-      echo; say "Keyinroq çiqib qayta kiring:  → Log Out" ;;
-  esac
-}
-
 if [ "${1:-}" = "--uninstall" ]; then
   say "Özbekça klaviatura öçirilmoqda..."
   disable_layout
   rm -rf "$USER_DIR/$BUNDLE" && ok "Öçirildi: $USER_DIR/$BUNDLE"
   remove_system_copy
-  offer_logout
   exit 0
 fi
 
@@ -118,7 +104,6 @@ enable_layout
 
 cat <<'EOF'
 
-Qayta kirganingizdan söng fn / 🌐 tugmasi bilan "UZ" klaviaturasini tanlang:
+Endi fn / 🌐 tugmasi bilan "UZ" klaviaturasini tanlang:
   ⌥ o → ö   ⌥ g → ğ   ⌥ s → ş   ⌥ c → ç   ⌥ ' → ʼ   (⇧ bilan — katta harf)
 EOF
-offer_logout
