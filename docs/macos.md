@@ -9,8 +9,10 @@
    ```sh
    curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/macos/install.sh | bash
    ```
-3. Skript klaviaturani örnatadi va uni klaviaturalar röyxatiga qöşadi. Tizimdan çiqib qayta kiriş şart emas.
-4. **fn / 🌐** tugmasini bosing. Röyxatda **UZ** belgili **Uzbek Latin** paydo böladi.
+3. Skript klaviaturani örnatadi va uni klaviaturalar röyxatiga qöşadi.
+   Oxirida *"Hozir çiqasizmi?"* deb söraydi. `ha` deb yozing va Enter bosing.
+   macOS yangi klaviaturani faqat qayta kirganda yuklaydi.
+4. Qayta kirgaç **fn / 🌐** tugmasini bosing. Röyxatda **UZ** belgili **Uzbek Latin** paydo böladi.
 
 Administrator paroli kerak emas. Apple'ning *"could not verify"* ogohlantirişi ham çiqmaydi.
 
@@ -20,12 +22,12 @@ Administrator paroli kerak emas. Apple'ning *"could not verify"* ogohlantirişi 
 2. *"Apple could not verify…"* degan oyna çiqsa:
    **Done** ni bosing → **System Settings → Privacy & Security** ni oçing → pastga tuşing → **Open Anyway** ni bosing.
    Bu ogohlantiriş paket hali Apple tomonidan imzolanmagani uçun çiqadi. Fayl xavfsiz.
-3. Örnatiş tugagaç **fn / 🌐** tugmasini bosing va **Uzbek Latin** ni tanlang.
+3. Örnatiş tugagaç tizimdan çiqib qayta kiring.
 
 ## Muammolar
 
 **fn / 🌐 bosganda Uzbek Latin körinmayapti.**
-Tizimdan çiqib qayta kiring. Agar baribir körinmasa, qölda qöşing:
+Avval tizimdan çiqib qayta kirganingizga işonç hosil qiling. Agar baribir körinmasa, qölda qöşing:
 **System Settings → Keyboard → Text Input → Edit… → +** → qidiruvga *Uzbek* deb yozing → **Uzbek Latin** → **Add**.
 
 **⌥ + o bosganda ø çiqyapti.**
@@ -37,7 +39,7 @@ Terminalda:
 ```sh
 curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/macos/install.sh | bash -s -- --uninstall
 ```
-Skript klaviaturani röyxatdan olib taşlaydi va fayllarni öçiradi.
+Skript klaviaturani röyxatdan olib taşlaydi va fayllarni öçiradi. Keyin tizimdan çiqib qayta kiring.
 
 Qölda öçiriş:
 1. **System Settings → Keyboard → Text Input → Edit…** ni oçing, **Uzbek Latin** ni tanlang va **−** ni bosing.
