@@ -54,7 +54,7 @@ foreach ($arch in $arches.Keys) {
 # 3. Package
 Copy-Item "$PSScriptRoot\install.ps1", "$PSScriptRoot\uninstall.ps1", "$PSScriptRoot\install.cmd", "$PSScriptRoot\uninstall.cmd", $klc $pkg
 Copy-Item "$repo\LICENSE" $pkg
-$zip = "$out\$pkgName.zip"
+$zip = "$out\$pkgName-$version.zip"
 Remove-Item $zip -ErrorAction SilentlyContinue
 Compress-Archive -Path $pkg -DestinationPath $zip
 Get-ChildItem $pkg -Recurse | Select-Object FullName, Length | Format-Table -AutoSize

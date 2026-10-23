@@ -128,7 +128,7 @@ jobs:
         run: |
           mkdir -p dist stage/UzbekKeyboard-Linux
           cp -R linux/xkb linux/install.sh LICENSE stage/UzbekKeyboard-Linux/
-          tar -C stage -czf dist/UzbekKeyboard-Linux.tar.gz UzbekKeyboard-Linux
+          tar -C stage -czf "dist/UzbekKeyboard-Linux-$(cat VERSION).tar.gz" UzbekKeyboard-Linux
       - uses: actions/upload-artifact@v7
         with:
           name: linux

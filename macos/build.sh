@@ -19,8 +19,8 @@ trap 'rm -rf "$STAGE"' EXIT
 cp -R macos/UzbekKeyboard.bundle "$STAGE/"
 
 # Zip for manual install (drag into ~/Library/Keyboard Layouts)
-(cd "$STAGE" && ditto -c -k --norsrc --noextattr --keepParent UzbekKeyboard.bundle UzbekKeyboard-macOS.zip)
-mv "$STAGE/UzbekKeyboard-macOS.zip" "$OUT/"
+(cd "$STAGE" && ditto -c -k --norsrc --noextattr --keepParent UzbekKeyboard.bundle "UzbekKeyboard-macOS-$VERSION.zip")
+mv "$STAGE/UzbekKeyboard-macOS-$VERSION.zip" "$OUT/"
 
 # Installer package -> /Library/Keyboard Layouts (all users)
 ROOT_DIR="$STAGE/root"
@@ -37,9 +37,9 @@ pkgbuild --quiet ${SIGN[@]+"${SIGN[@]}"} \
   --version "$VERSION" \
   --install-location "/Library/Keyboard Layouts" \
   --scripts macos/pkg-scripts \
-  "$OUT/UzbekKeyboard-macOS.pkg"
+  "$OUT/UzbekKeyboard-macOS-$VERSION.pkg"
 
-PKG="$OUT/UzbekKeyboard-macOS.pkg"
+PKG="$OUT/UzbekKeyboard-macOS-$VERSION.pkg"
 if [ -n "${PKG_SIGN_IDENTITY:-}" ]; then
   if [ -n "${NOTARY_PROFILE:-}" ]; then
     AUTH=(--keychain-profile "$NOTARY_PROFILE")

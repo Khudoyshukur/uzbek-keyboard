@@ -102,7 +102,10 @@ if [ -n "$here" ] && [ -d "$here/$BUNDLE" ]; then
 else
   tmp=$(mktemp -d)
   trap 'rm -rf "$tmp"' EXIT
-  curl -fsSL "https://github.com/$REPO/releases/latest/download/UzbekKeyboard-macOS.zip" -o "$tmp/k.zip"
+  # Release files carry the version, so look up the latest tag first.
+  tag=$(curl -fsSLI -o /dev/null -w '%{url_effective}' "https://github.com/$REPO/releases/latest")
+  tag=${tag##*/}
+  curl -fsSL "https://github.com/$REPO/releases/download/$tag/UzbekKeyboard-macOS-${tag#v}.zip" -o "$tmp/k.zip"
   ditto -x -k "$tmp/k.zip" "$tmp"
   src="$tmp/$BUNDLE"
   ok "Yuklab olindi"

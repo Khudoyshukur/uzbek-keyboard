@@ -27,12 +27,13 @@ Yaratilgan fayllarni (`.keylayout`, `.klc`, XKB) qölda tahrirlamang.
 
 ## Reliz
 
-`VERSION` ni yangilang, commit qiling, keyin:
+`VERSION` ni yangilang, `python3 tools/generate.py` ni işga tuşiring, commit qiling, keyin:
 ```sh
 git tag v1.2.3 && git push origin v1.2.3
 ```
-CI barça fayllarni yiğib, GitHub Releases'ga joylaydi. Fayl nomlarida versiya yöq,
-şuning uçun `releases/latest/download/...` havolalari doim eng sönggi versiyaga olib boradi.
+CI barça fayllarni yiğib, GitHub Releases'ga joylaydi (`.pkg` imzolanadi va notarize qilinadi).
+Fayl nomlarida versiya bor (masalan `UzbekKeyboard-macOS-1.2.3.pkg`). Örnatiş skriptlari
+`releases/latest` orqali eng sönggi tegni aniqlab, şu versiyadagi faylni yuklaydi.
 
 ## Texnik tafsilotlar
 

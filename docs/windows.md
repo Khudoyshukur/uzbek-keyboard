@@ -15,7 +15,7 @@
 
 ## Boşqa usul: ZIP arxiv
 
-1. [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest) sahifasidan `UzbekKeyboard-Windows.zip` ni yuklab oling.
+1. [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest) sahifasidan `UzbekKeyboard-Windows-….zip` ni yuklab oling.
 2. Arxivni oçing: öng tugma → **Extract All** → **Extract**. Arxiv içida turib işga tuşirmang.
 3. `install.cmd` ni ikki marta bosing.
    - *"Windows protected your PC"* çiqsa: **More info → Run anyway**.

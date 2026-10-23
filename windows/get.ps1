@@ -8,7 +8,10 @@
     $ProgressPreference = 'SilentlyContinue'
     $action = if ($args -contains '-Uninstall') { 'uninstall' } else { 'install' }
     [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-    $url = 'https://github.com/khudoyshukur/uzbek-keyboard/releases/latest/download/UzbekKeyboard-Windows.zip'
+    # Release files carry the version, so look up the latest tag first.
+    $req = [Net.WebRequest]::Create('https://github.com/khudoyshukur/uzbek-keyboard/releases/latest')
+    $res = $req.GetResponse(); $tag = $res.ResponseUri.Segments[-1]; $res.Close()
+    $url = "https://github.com/khudoyshukur/uzbek-keyboard/releases/download/$tag/UzbekKeyboard-Windows-$($tag.TrimStart('v')).zip"
     $tmp = Join-Path $env:TEMP ('uzbek-keyboard-' + [guid]::NewGuid())
     try {
         New-Item -ItemType Directory $tmp | Out-Null

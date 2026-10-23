@@ -42,7 +42,10 @@ HERE=$(cd "$(dirname "$0")" 2>/dev/null && pwd || echo .)
 if [ ! -f "$HERE/xkb/symbols/$NAME" ]; then
   TMP=$(mktemp -d)
   trap 'rm -rf "$TMP"' EXIT
-  curl -fsSL "https://github.com/$REPO/releases/latest/download/UzbekKeyboard-Linux.tar.gz" | tar -xz -C "$TMP"
+  # Release files carry the version, so look up the latest tag first.
+  TAG=$(curl -fsSLI -o /dev/null -w '%{url_effective}' "https://github.com/$REPO/releases/latest")
+  TAG=${TAG##*/}
+  curl -fsSL "https://github.com/$REPO/releases/download/$TAG/UzbekKeyboard-Linux-${TAG#v}.tar.gz" | tar -xz -C "$TMP"
   HERE="$TMP/UzbekKeyboard-Linux"
   echo "✓ Yuklab olindi"
 fi
