@@ -13,13 +13,35 @@ permissions:
 jobs:
   macos:
     runs-on: macos-latest
+    env:
+      # Set these repo secrets to sign + notarize the .pkg on release tags.
+      MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}   # base64 of the Developer ID Installer .p12
+      MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
       - uses: actions/checkout@v7
       - name: Generated files are up to date
         run: python3 tools/generate.py --check
       - name: Layout checks (incl. Apple DTD validation)
         run: python3 tests/check_layouts.py
-      - name: Build .zip and .pkg
+      - name: Import Developer ID Installer certificate
+        if: startsWith(github.ref, 'refs/tags/v') && env.MACOS_CERT_P12 != ''
+        run: |
+          KC="$RUNNER_TEMP/signing.keychain-db"; KP=$(uuidgen)
+          security create-keychain -p "$KP" "$KC"
+          security set-keychain-settings -lut 21600 "$KC"
+          security unlock-keychain -p "$KP" "$KC"
+          echo "$MACOS_CERT_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KC" -P "$MACOS_CERT_PASSWORD" -T /usr/bin/pkgbuild -T /usr/bin/productsign
+          rm -f "$RUNNER_TEMP/cert.p12"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KP" "$KC" >/dev/null
+          security list-keychains -d user -s "$KC" $(security list-keychains -d user | tr -d '"')
+          id=$(security find-identity -v "$KC" | sed -n 's/.*"\(Developer ID Installer: .*\)"/\1/p' | head -1)
+          test -n "$id"
+          echo "PKG_SIGN_IDENTITY=$id" >> "$GITHUB_ENV"
+      - name: Build .zip and .pkg (signed + notarized on release tags)
         run: ./macos/build.sh
       - name: No macOS metadata files in the package
         run: |

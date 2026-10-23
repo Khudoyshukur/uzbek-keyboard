@@ -19,10 +19,8 @@ Administrator paroli kerak emas. Apple'ning *"could not verify"* ogohlantirişi 
 ## Boşqa usul: .pkg installer
 
 1. [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest) sahifasidan `UzbekKeyboard-macOS.pkg` ni yuklab oling va ikki marta bosing.
-2. *"Apple could not verify…"* degan oyna çiqsa:
-   **Done** ni bosing → **System Settings → Privacy & Security** ni oçing → pastga tuşing → **Open Anyway** ni bosing.
-   Bu ogohlantiriş paket hali Apple tomonidan imzolanmagani uçun çiqadi. Fayl xavfsiz.
-3. Örnatiş tugagaç tizimdan çiqib qayta kiring.
+   Paket Apple tomonidan imzolangan va tekşirilgan (notarized).
+2. Örnatiş tugagaç tizimdan çiqib qayta kiring.
 
 ## Muammolar
 
