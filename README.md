@@ -41,6 +41,9 @@ irm https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/windows/g
 curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/linux/install.sh | sh
 ```
 
+> **Muhim:** örnatgandan va öçirgandan söng **tizimdan çiqib qayta kiring** (Log out → Log in).
+> Usiz klaviatura röyxatda körinmasligi yoki öçirilgandan keyin ham qolib ketişi mumkin.
+
 Batafsil yöriqnoma, boşqa usullar va **öçiriş**: [macOS](docs/macos.md) · [Windows](docs/windows.md) · [Linux](docs/linux.md)
 
 Fayllarni qölda yuklab olmoqçi bölsangiz: [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest)

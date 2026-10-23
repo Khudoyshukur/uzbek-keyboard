@@ -70,7 +70,7 @@ try {
         Write-Warning "Örnatildi, lekin tillar röyxatiga avtomatik qöşib bölmadi: $_"
         Write-Warning "Qölda qöşing: Settings > Time & language > Language & region > Uzbek (Latin) > Keyboards."
     }
-    Write-Host 'Tayyor! Agar klaviatura darhol körinmasa, tizimdan çiqib qayta kiring.'
+    Write-Host 'Tayyor! Endi tizimdan çiqib qayta kiring (Sign out), söng Win + Space bilan Uzbek Latin ni tanlang.'
 } catch {
     Write-Error $_
     if (-not $Quiet) { Read-Host 'Yopiş uçun Enter bosing' }

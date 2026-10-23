@@ -10,8 +10,8 @@
    irm https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/windows/get.ps1 | iex
    ```
 3. *"Do you want to allow this app to make changes to your device?"* deb söralganda **Yes** ni bosing.
-4. Tayyor. Klaviaturalar orasida **Win + Space** bilan almaşing. Röyxatda **Uzbek Latin** paydo böladi.
-   Darhol körinmasa, tizimdan çiqib qayta kiring.
+4. **Tizimdan çiqib qayta kiring** (Start → profil belgisi → Sign out).
+5. Klaviaturalar orasida **Win + Space** bilan almaşing. Röyxatda **Uzbek Latin** paydo böladi.
 
 ## Boşqa usul: ZIP arxiv
 
@@ -20,6 +20,7 @@
 3. `install.cmd` ni ikki marta bosing.
    - *"Windows protected your PC"* çiqsa: **More info → Run anyway**.
    - Administrator ruxsati söralganda **Yes** ni bosing.
+4. Tizimdan çiqib qayta kiring.
 
 ## Muammolar
 

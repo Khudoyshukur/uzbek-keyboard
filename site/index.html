@@ -374,12 +374,14 @@
           <details>
             <summary>Qanday öçiriladi?</summary>
             <div class="cmd"><pre id="un-text"></pre><button type="button" data-copy="un-text">Nusxalaş</button></div>
+            <p class="note">Öçirgandan söng <b>tizimdan çiqib qayta kiring</b>.</p>
           </details>
         </div>
         <div class="card">
           <h3>Yoki faylni yuklab oling</h3>
           <p class="hint" id="dl-hint"></p>
           <div class="dl-list" id="downloads"></div>
+          <p class="note" style="margin:14px 0 0">Örnatgandan söng <b>tizimdan çiqib qayta kiring</b>.</p>
           <div class="meta"><span id="dl-ver"></span><a id="guide" href="#">Batafsil yöriqnoma →</a></div>
         </div>
       </div>
@@ -464,7 +466,7 @@
       name: 'macOS', where: '<b>Terminal</b> ilovasini oçing (⌘ Space → “Terminal”) va buyruqni qöying.',
       cmd: 'curl -fsSL ' + RAW + 'macos/install.sh | bash',
       un: 'curl -fsSL ' + RAW + 'macos/install.sh | bash -s -- --uninstall',
-      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', 'Oxirida tizimdan çiqib qayta kiriş taklif qilinadi: <b>ha</b> deb yozing.', 'Qayta kirgaç <kbd>fn</kbd> / <kbd>🌐</kbd> bilan <b>Uzbek Latin</b> (UZ) ni tanlang.'],
+      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', '<b>Tizimdan çiqib qayta kiring.</b> Skript buni oxirida taklif qiladi: <b>ha</b> deb yozing.', 'Qayta kirgaç <kbd>fn</kbd> / <kbd>🌐</kbd> bilan <b>Uzbek Latin</b> (UZ) ni tanlang.'],
       dlHint: 'Apple tomonidan imzolangan va tekşirilgan installer.',
       files: [['Installer (.pkg)', 'Ikki marta bosing va körsatmalarga amal qiling', /macOS.*\.pkg$/], ['Arxiv (.zip)', '~/Library/Keyboard Layouts ga qölda joylaş uçun', /macOS.*\.zip$/]],
       guide: 'docs/macos.md'
@@ -473,7 +475,7 @@
       name: 'Windows', where: '<b>Start</b> → “PowerShell” ni oçing va buyruqni qöying (siçqonçaning öng tugmasi).',
       cmd: 'irm ' + RAW + 'windows/get.ps1 | iex',
       un: '& ([scriptblock]::Create((irm ' + RAW + 'windows/get.ps1))) -Uninstall',
-      steps: ['Buyruqni nusxalang va PowerShellga qöyib, Enter bosing.', 'Administrator ruxsati söralganda <b>Yes</b> ni bosing.', '<kbd>Win</kbd> + <kbd>Space</kbd> bilan <b>Uzbek Latin</b> ni tanlang.'],
+      steps: ['Buyruqni nusxalang va PowerShellga qöyib, Enter bosing.', 'Administrator ruxsati söralganda <b>Yes</b> ni bosing.', '<b>Tizimdan çiqib qayta kiring</b> (Start → profil → Sign out).', '<kbd>Win</kbd> + <kbd>Space</kbd> bilan <b>Uzbek Latin</b> ni tanlang.'],
       dlHint: 'Arxivni oçing va install.cmd ni ikki marta bosing.',
       files: [['Arxiv (.zip)', 'Extract All → install.cmd', /Windows.*\.zip$/]],
       guide: 'docs/windows.md'
@@ -482,7 +484,7 @@
       name: 'Linux', where: 'Terminalni oçing va buyruqni qöying. Administrator huquqi kerak emas.',
       cmd: 'curl -fsSL ' + RAW + 'linux/install.sh | sh',
       un: 'curl -fsSL ' + RAW + 'linux/install.sh | sh -s -- --uninstall',
-      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', 'Tizimdan çiqib qayta kiring.', 'Klaviaturalar röyxatidan <b>Uzbek Latin</b> ni tanlang. Harflar <b>öng tarafdagi Alt</b> bilan yoziladi.'],
+      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', '<b>Tizimdan çiqib qayta kiring.</b>', 'Klaviaturalar röyxatidan <b>Uzbek Latin</b> ni tanlang. Harflar <b>öng tarafdagi Alt</b> bilan yoziladi.'],
       dlHint: 'Arxivni oçing va içidagi install.sh ni işga tuşiring.',
       files: [['Arxiv (.tar.gz)', 'tar -xzf … && sh install.sh', /Linux.*\.tar\.gz$/]],
       guide: 'docs/linux.md'

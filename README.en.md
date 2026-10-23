@@ -13,7 +13,7 @@ It's standard US QWERTY. Hold **Option ⌥** (macOS) or **Right Alt** (Windows, 
 | Windows (PowerShell) | `irm https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/windows/get.ps1 \| iex` |
 | Linux | `curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/linux/install.sh \| sh` |
 
-Each command downloads the latest release, installs it, and enables it. Afterwards, log out and back in on macOS and Linux.
+Each command downloads the latest release, installs it, and enables it. **After installing or uninstalling, log out and back in** (on every system). Until then the layout may not appear, or may linger after removal.
 To remove it, add `--uninstall`; on Windows, add `-Uninstall`. The [install guides](docs/) (in Uzbek) have the exact commands.
 You can also download the files directly from [Releases](https://github.com/khudoyshukur/uzbek-keyboard/releases/latest).
 
