@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Özbekça klaviatura</title>
+<meta name="description" content="Yangi özbek lotin alifbosi uçun klaviatura (Ö ğ ş ç ʼ) va Kirill, Lotin, Yangi lotin konvertori.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e6e6e6;
+    --soft: #f6f6f4; --accent: #1f6feb; --on-accent: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212; --fg: #ececec; --muted: #9a9a9a; --line: #2c2c2c;
+      --soft: #1c1c1c; --accent: #4c8dff; --on-accent: #0b0b0b;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 56px 16px 40px; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.15rem; margin: 0 0 16px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); font-size: 1.05rem; }
+  .lead b { color: var(--fg); }
+  section { padding: 36px 0; border-top: 1px solid var(--line); min-width: 0; }
+  body { overflow-x: hidden; }
+  header { padding-bottom: 36px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, kbd, textarea, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  /* Keys */
+  .keys { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .keys th, .keys td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  .keys th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
+  .keys td:first-child { font-size: 1.15rem; font-weight: 600; width: 22%; }
+  kbd {
+    display: inline-block; padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 5px; background: var(--soft); font-size: 0.85em;
+  }
+
+  /* Tabs (segmented control) */
+  .seg { display: inline-flex; padding: 3px; border-radius: 9px; background: var(--soft); border: 1px solid var(--line); gap: 2px; }
+  .seg button {
+    border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.9rem;
+    padding: 5px 12px; border-radius: 7px; cursor: pointer;
+  }
+  .seg button[aria-selected="true"] { background: var(--bg); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+
+  /* Install */
+  .cmd { display: flex; align-items: stretch; margin: 14px 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); overflow: hidden; }
+  .cmd pre { margin: 0; padding: 12px 14px; flex: 1; min-width: 0; overflow-x: auto; font-size: 0.85rem; white-space: pre; }
+  .btn {
+    border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: inherit; font-size: 0.85rem;
+    padding: 6px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--muted); }
+  .cmd .btn { border: 0; border-left: 1px solid var(--line); border-radius: 0; padding: 0 14px; background: transparent; }
+  .note { color: var(--muted); font-size: 0.9rem; }
+  .dl { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 6px; font-size: 0.9rem; }
+
+  /* Converter */
+  .conv { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: start; }
+  .pane { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .pane .seg { align-self: flex-start; }
+  textarea {
+    width: 100%; min-height: 220px; resize: vertical; padding: 12px 14px; font-size: 1rem; line-height: 1.5;
+    font-family: inherit; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; outline: none;
+  }
+  textarea:focus { border-color: var(--accent); }
+  textarea[readonly] { background: var(--soft); }
+  .swap { margin-top: 40px; width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 1rem; }
+  .pane-foot { display: flex; justify-content: flex-end; }
+
+  footer { padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+  @media (max-width: 640px) {
+    main { padding-top: 36px; }
+    .conv { grid-template-columns: 1fr; }
+    .swap { margin: 0 auto; transform: rotate(90deg); }
+    textarea { min-height: 150px; }
+    .seg button { padding: 5px 9px; }
+    .keys td:first-child { width: auto; }
+    .keys th, .keys td { padding: 9px 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Özbekça klaviatura</h1>
+    <p class="lead">Yangi özbek lotin alifbosi uçun klaviatura: <b>Ö ö, Ğ ğ, Ş ş, Ç ç</b> va tutuq belgisi <b>ʼ</b>.
+      Asosi odatiy US QWERTY. Bepul va oçiq kodli.</p>
+  </header>
+
+  <section id="keys">
+    <h2>Qanday yoziladi</h2>
+    <table class="keys">
+      <thead><tr><th>Harf</th><th>macOS</th><th>Windows / Linux</th></tr></thead>
+      <tbody>
+        <tr><td>ö Ö</td><td><kbd>⌥</kbd> <kbd>O</kbd></td><td><kbd>AltGr</kbd> <kbd>O</kbd></td></tr>
+        <tr><td>ğ Ğ</td><td><kbd>⌥</kbd> <kbd>G</kbd></td><td><kbd>AltGr</kbd> <kbd>G</kbd></td></tr>
+        <tr><td>ş Ş</td><td><kbd>⌥</kbd> <kbd>S</kbd></td><td><kbd>AltGr</kbd> <kbd>S</kbd></td></tr>
+        <tr><td>ç Ç</td><td><kbd>⌥</kbd> <kbd>C</kbd></td><td><kbd>AltGr</kbd> <kbd>C</kbd></td></tr>
+        <tr><td>ʼ</td><td><kbd>⌥</kbd> <kbd>'</kbd></td><td><kbd>AltGr</kbd> <kbd>'</kbd></td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:12px">Katta harf uçun <kbd>⇧ Shift</kbd> ni ham bosing. Windowsda <kbd>AltGr</kbd> örniga <kbd>Ctrl</kbd> + <kbd>Alt</kbd> ham işlaydi.</p>
+  </section>
+
+  <section id="install">
+    <h2>Örnatiş</h2>
+    <div class="seg" role="tablist" id="os-tabs">
+      <button role="tab" data-os="mac">macOS</button>
+      <button role="tab" data-os="win">Windows</button>
+      <button role="tab" data-os="linux">Linux</button>
+    </div>
+    <div class="cmd">
+      <pre id="cmd-text"></pre>
+      <button class="btn" id="cmd-copy" type="button">Nusxalaş</button>
+    </div>
+    <p class="note" id="cmd-note"></p>
+    <div class="dl" id="downloads"></div>
+  </section>
+
+  <section id="convert">
+    <h2>Konvertor</h2>
+    <div class="conv">
+      <div class="pane">
+        <div class="seg" role="tablist" id="from-tabs"></div>
+        <textarea id="src" spellcheck="false" placeholder="Matnni bu yerga yozing yoki qöying…" aria-label="Asl matn"></textarea>
+      </div>
+      <button class="btn swap" id="swap" type="button" title="Almaştiriş" aria-label="Almaştiriş">⇄</button>
+      <div class="pane">
+        <div class="seg" role="tablist" id="to-tabs"></div>
+        <textarea id="dst" readonly spellcheck="false" aria-label="Natija"></textarea>
+        <div class="pane-foot"><button class="btn" id="dst-copy" type="button">Nusxalaş</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://github.com/khudoyshukur/uzbek-keyboard">GitHub</a> · MIT litsenziyasi
+  </footer>
+</main>
+
+<script src="convert.js"></script>
+<script>
+(function () {
+  var REPO = 'khudoyshukur/uzbek-keyboard';
+  var RAW = 'https://raw.githubusercontent.com/' + REPO + '/main/';
+
+  function copy(text, btn) {
+    var done = function () { var t = btn.textContent; btn.textContent = 'Nusxalandi ✓'; setTimeout(function () { btn.textContent = t; }, 1400); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
+    else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  // ---------- Install ----------
+  var OS = {
+    mac: { cmd: 'curl -fsSL ' + RAW + 'macos/install.sh | bash',
+           note: '<b>Terminal</b> ilovasini oçing va buyruqni qöying. Oxirida tizimdan çiqib qayta kiring.',
+           files: [['.pkg installer', /macOS.*\.pkg$/], ['.zip', /macOS.*\.zip$/]] },
+    win: { cmd: 'irm ' + RAW + 'windows/get.ps1 | iex',
+           note: '<b>PowerShell</b> ni oçing va buyruqni qöying. Administrator ruxsati söraladi.',
+           files: [['.zip', /Windows.*\.zip$/]] },
+    linux: { cmd: 'curl -fsSL ' + RAW + 'linux/install.sh | sh',
+             note: 'Terminalda işga tuşiring, keyin tizimdan çiqib qayta kiring.',
+             files: [['.tar.gz', /Linux.*\.tar\.gz$/]] }
+  };
+  var assets = null, current = 'mac';
+  var osTabs = document.querySelectorAll('#os-tabs button');
+
+  function showOS(os) {
+    current = os;
+    osTabs.forEach(function (b) { b.setAttribute('aria-selected', b.dataset.os === os); });
+    document.getElementById('cmd-text').textContent = OS[os].cmd;
+    document.getElementById('cmd-note').innerHTML = OS[os].note;
+    var dl = document.getElementById('downloads'), html = '';
+    if (assets) {
+      OS[os].files.forEach(function (f) {
+        var a = assets.list.filter(function (x) { return f[1].test(x.name); })[0];
+        if (a) html += '<a href="' + a.browser_download_url + '">Yuklab oliş: ' + f[0] + '</a>';
+      });
+      html += '<span class="note">Versiya ' + assets.tag.replace(/^v/, '') + '</span>';
+    }
+    html += '<a href="https://github.com/' + REPO + '/releases/latest">Barça fayllar</a>';
+    dl.innerHTML = html;
+  }
+  osTabs.forEach(function (b) { b.addEventListener('click', function () { showOS(b.dataset.os); }); });
+  document.getElementById('cmd-copy').addEventListener('click', function () { copy(OS[current].cmd, this); });
+
+  var ua = navigator.userAgent;
+  showOS(/Windows/.test(ua) ? 'win' : /Linux|X11/.test(ua) && !/Android/.test(ua) ? 'linux' : 'mac');
+
+  fetch('https://api.github.com/repos/' + REPO + '/releases/latest')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.assets) { assets = { tag: j.tag_name, list: j.assets }; showOS(current); } })
+    .catch(function () {});
+
+  // ---------- Converter ----------
+  var SCRIPTS = [['cyr', 'Kirill'], ['lat', 'Lotin'], ['new', 'Yangi lotin']];
+  var EXAMPLE = { cyr: 'Ўзбекистон — менинг ватаним. Ғалаба, шаҳар, чиройли.', lat: '', new: '' };
+  var from = store('uz-from') || 'cyr', to = store('uz-to') || 'new';
+  var src = document.getElementById('src'), dst = document.getElementById('dst');
+
+  function tabs(id, get, set) {
+    var el = document.getElementById(id);
+    SCRIPTS.forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.s = s[0]; b.textContent = s[1];
+      b.addEventListener('click', function () { set(s[0]); render(); });
+      el.appendChild(b);
+    });
+    return function () { el.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.s === get()); }); };
+  }
+  var paintFrom = tabs('from-tabs', function () { return from; }, function (s) { from = s; store('uz-from', s); });
+  var paintTo = tabs('to-tabs', function () { return to; }, function (s) { to = s; store('uz-to', s); });
+
+  function render() {
+    paintFrom(); paintTo();
+    dst.value = UzConvert.convert(src.value, from, to);
+  }
+  src.addEventListener('input', render);
+  document.getElementById('swap').addEventListener('click', function () {
+    var t = from; from = to; to = t; store('uz-from', from); store('uz-to', to);
+    src.value = dst.value; render(); src.focus();
+  });
+  document.getElementById('dst-copy').addEventListener('click', function () { copy(dst.value, this); });
+
+  src.value = UzConvert.convert(EXAMPLE.cyr, 'cyr', from);
+  render();
+})();
+</script>
+</body>
+</html>

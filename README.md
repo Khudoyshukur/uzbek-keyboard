@@ -2,6 +2,8 @@
 
 Yangi özbek lotin alifbosi uçun klaviatura: **Ö ö, Ğ ğ, Ş ş, Ç ç** va tutuq belgisi **ʼ**.
 
+Sayt va Kirill ↔ Lotin ↔ Yangi lotin konvertori: **[uzbek-keyboard.safix.uz](https://uzbek-keyboard.safix.uz)**
+
 - Asosi odatiy **US QWERTY**, yaʼni siz bilgan tugmalar özgarmaydi.
 - Harfni **Option ⌥** (macOS) yoki **AltGr / öng Alt** (Windows, Linux) bilan birga bosasiz.
 - Fonda heç qanday dastur işlamaydi. Bu tizimning öz klaviatura fayli.
