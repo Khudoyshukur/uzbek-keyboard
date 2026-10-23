@@ -39,4 +39,12 @@ JS
 }
 tis register "/Library/Keyboard Layouts/UzbekKeyboard.bundle" >/dev/null 2>&1 || true
 tis enable io.github.khudoyshukur.keyboardlayout.uzbek.uzbekkeyboard >/dev/null 2>&1 || true
+
+# Optionally log out so the change takes full effect, as install.sh offers.
+# Detached, so Installer can finish and show its "complete" screen first.
+launchctl asuser "$uid" sudo -u "$user" nohup /bin/bash -c '
+  sleep 2
+  ans=$(osascript -e "button returned of (display dialog \"Özgarişlar kuçga kiriši uçun tizimdan çiqib, qayta kiriş kerak.\" & return & return & \"Hozir çiqasizmi?\" with title \"Uzbek Latin\" buttons {\"Keyinroq\", \"Çiqiş\"} default button \"Çiqiş\" with icon note)" 2>/dev/null)
+  [ "$ans" = "Çiqiş" ] && osascript -e "tell application \"System Events\" to log out"
+' >/dev/null 2>&1 &
 exit 0
