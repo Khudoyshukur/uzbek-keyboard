@@ -3,216 +3,537 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Özbekça klaviatura</title>
-<meta name="description" content="Yangi özbek lotin alifbosi uçun klaviatura (Ö ğ ş ç ʼ) va Kirill, Lotin, Yangi lotin konvertori.">
+<title>Yangi alifbo konvertori va klaviaturasi | Kirill ↔ Lotin ↔ Yangi lotin</title>
+<meta name="description" content="Kirill, Lotin va Yangi lotin (ö, ğ, ş, ç) orasida bepul onlayn konvertor hamda yangi özbek alifbosi uçun klaviatura: macOS, Windows, Linux. Kirilldan lotinga, lotindan yangi alifboga bir zumda.">
+<meta name="keywords" content="yangi alifbo, yangi lotin alifbosi, kirill lotin konvertor, krill lotin, kirilldan lotinga, lotin kirill, o'zbek yangi alifbo, ö ğ ş ç, özbekça klaviatura, uzbek keyboard, uzbek latin keyboard, uzbek cyrillic latin converter">
+<link rel="canonical" href="https://uzbek-keyboard.safix.uz/">
+<meta name="theme-color" content="#0a8fb0">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://uzbek-keyboard.safix.uz/">
+<meta property="og:site_name" content="Özbekça klaviatura">
+<meta property="og:locale" content="uz_UZ">
+<meta property="og:title" content="Yangi alifbo konvertori va klaviaturasi">
+<meta property="og:description" content="Kirill ↔ Lotin ↔ Yangi lotin konvertori va Ö ğ ş ç ʼ uçun klaviatura. macOS, Windows, Linux. Bepul va oçiq kodli.">
+<meta property="og:image" content="https://uzbek-keyboard.safix.uz/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yangi alifbo konvertori va klaviaturasi">
+<meta name="twitter:description" content="Kirill ↔ Lotin ↔ Yangi lotin konvertori va yangi özbek alifbosi uçun klaviatura.">
+<meta name="twitter:image" content="https://uzbek-keyboard.safix.uz/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://uzbek-keyboard.safix.uz/#site",
+      "url": "https://uzbek-keyboard.safix.uz/",
+      "name": "Özbekça klaviatura",
+      "inLanguage": "uz"
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Kirill, Lotin, Yangi lotin konvertori",
+      "url": "https://uzbek-keyboard.safix.uz/#convert",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "uz",
+      "description": "Özbek matnini Kirill, Lotin (oʻ, gʻ, sh, ch) va Yangi lotin (ö, ğ, ş, ç) alifbolari orasida ögiruvçi bepul onlayn konvertor.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Özbekça klaviatura (Uzbek Latin)",
+      "url": "https://uzbek-keyboard.safix.uz/",
+      "downloadUrl": "https://github.com/khudoyshukur/uzbek-keyboard/releases/latest",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "macOS, Windows, Linux",
+      "license": "https://opensource.org/licenses/MIT",
+      "description": "Yangi özbek lotin alifbosi uçun klaviatura: Ö ö, Ğ ğ, Ş ş, Ç ç va ʼ. Asosi US QWERTY.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Yangi özbek lotin alifbosi nima?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yangi alifbo loyihasida oʻ, gʻ, sh va ch örniga bitta belgili ö, ğ, ş va ç harflari taklif qilingan. Masalan: «Oʻzbekiston» → «Özbekiston», «shahar» → «şahar», «choy» → «çoy»."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kirill matnni lotinga qanday ögiraman?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yuqoridagi konvertorda çap tomonda Kirill ni, öng tomonda Lotin yoki Yangi lotin ni tanlang va matnni qöying. Natija darhol çiqadi, uni bir tugma bilan nusxalaş mumkin. Teskarisi, yaʼni lotindan kirillga ögiriş ham işlaydi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Oʻ va gʻ ni oddiy apostrof bilan (o', g') yozsam böladimi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ha. Konvertor o', g', oʻ, o‘, o’ kabi barça apostrof turlarini tuşunadi va ularni tögri harfga aylantiradi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ö, ğ, ş, ç harflarini kompyuterda qanday yozaman?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bu saytdagi klaviaturani örnating. Keyin harf tugmasini ⌥ Option (macOS) yoki AltGr (Windows, Linux) bilan birga bosing: ⌥ O → ö, ⌥ G → ğ, ⌥ S → ş, ⌥ C → ç."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Telefonda işlaydimi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Klaviatura kompyuterlar uçun: macOS, Windows va Linux. Konvertor esa telefon brauzerida ham işlaydi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bu bepulmi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ha, butunlay bepul va oçiq kodli (MIT litsenziyasi). Matningiz heç qayerga yuborilmaydi, ögiriş brauzerning özida bajariladi."
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a8fb0'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3EUZ%3C/text%3E%3C/svg%3E">
 <style>
   :root {
-    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e6e6e6;
-    --soft: #f6f6f4; --accent: #1f6feb; --on-accent: #ffffff;
+    --bg: #ffffff; --fg: #16181d; --muted: #646a73; --line: #e7e8eb; --soft: #f5f6f7; --card: #ffffff;
+    --accent: #0a8fb0; --accent-soft: #e5f4f8; --on-accent: #ffffff; --green: #1e9e46;
+    --key: #ffffff; --key-edge: #d5d8dd; --key-text: #3a3f47;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 1px 3px rgba(16, 24, 40, .08);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #121212; --fg: #ececec; --muted: #9a9a9a; --line: #2c2c2c;
-      --soft: #1c1c1c; --accent: #4c8dff; --on-accent: #0b0b0b;
+      --bg: #0f1114; --fg: #eceef1; --muted: #9aa1ab; --line: #262a30; --soft: #171a1f; --card: #15181c;
+      --accent: #3bb8d8; --accent-soft: #10303a; --on-accent: #06222b; --green: #43c06a;
+      --key: #1d2127; --key-edge: #2e333b; --key-text: #c9ced6;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4);
     }
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--fg);
+    margin: 0; background: var(--bg); color: var(--fg); overflow-x: hidden;
     font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 56px 16px 40px; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
-  h2 { font-size: 1.15rem; margin: 0 0 16px; }
-  p { margin: 0 0 12px; }
-  .lead { color: var(--muted); font-size: 1.05rem; }
-  .lead b { color: var(--fg); }
-  section { padding: 36px 0; border-top: 1px solid var(--line); min-width: 0; }
-  body { overflow-x: hidden; }
-  header { padding-bottom: 36px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  code, kbd, textarea, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  code, kbd, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { letter-spacing: -0.015em; }
+  h2 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+  section { padding: 72px 0; }
+  section + section { border-top: 1px solid var(--line); }
 
-  /* Keys */
-  .keys { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-  .keys th, .keys td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  /* Top bar */
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; color: var(--fg); }
+  .brand:hover { text-decoration: none; }
+  .logo { width: 28px; height: 28px; border-radius: 7px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+  .nav { display: flex; align-items: center; gap: 22px; font-size: 0.93rem; }
+  .nav a.link { color: var(--muted); }
+  .nav a.link:hover { color: var(--fg); text-decoration: none; }
+  .star { display: inline-flex; align-items: stretch; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 0.88rem; color: var(--fg); background: var(--card); }
+  .star:hover { text-decoration: none; border-color: var(--muted); }
+  .star span { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; }
+  .star .count { border-left: 1px solid var(--line); background: var(--soft); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .star svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* Hero */
+  .hero { padding: 80px 0 64px; text-align: center; }
+  .pill { display: inline-flex; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; margin-bottom: 22px; }
+  .pill b { color: var(--green); font-weight: 600; }
+  .hero h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); line-height: 1.08; margin: 0 0 18px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin: 0 auto 32px; }
+  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg);
+    font: inherit; font-size: 0.95rem; font-weight: 550; padding: 10px 18px; border-radius: 10px; cursor: pointer; white-space: nowrap;
+  }
+  .btn:hover { text-decoration: none; border-color: var(--muted); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.primary:hover { filter: brightness(1.06); }
+  .btn.small { font-size: 0.85rem; padding: 6px 12px; border-radius: 8px; font-weight: 500; }
+
+  /* Keyboard drawing */
+  .kb { display: inline-flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 16px; background: var(--soft); border: 1px solid var(--line); max-width: 100%; }
+  .row { display: flex; gap: 6px; }
+  .row:nth-child(2) { padding-left: 18px; }
+  .row:nth-child(3) { padding-left: 36px; }
+  .k {
+    width: 46px; height: 46px; border-radius: 8px; background: var(--key); border: 1px solid var(--key-edge); border-bottom-width: 3px;
+    color: var(--key-text); font-size: 0.85rem; display: flex; align-items: flex-start; justify-content: flex-start; padding: 5px 7px; position: relative;
+  }
+  .k.hi { border-color: var(--accent); background: var(--accent-soft); }
+  .k.hi .alt { position: absolute; right: 6px; bottom: 3px; font-size: 1.15rem; font-weight: 700; color: var(--accent); }
+  .k.mod { width: auto; padding: 5px 12px; font-size: 0.8rem; align-items: center; }
+  .kb .mods { display: flex; justify-content: center; gap: 8px; margin-top: 4px; font-size: 0.8rem; color: var(--muted); align-items: center; }
+  .kb-cap { margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
+
+  /* Features */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feature { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  .feature h3 { font-size: 1rem; margin: 10px 0 6px; }
+  .feature p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+  .ico { width: 34px; height: 34px; border-radius: 9px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+  .ico svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Key table */
+  .keys { width: 100%; border-collapse: collapse; }
+  .keys th, .keys td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); }
   .keys th { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
-  .keys td:first-child { font-size: 1.15rem; font-weight: 600; width: 22%; }
-  kbd {
-    display: inline-block; padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px;
-    border-radius: 5px; background: var(--soft); font-size: 0.85em;
-  }
+  .keys td:first-child { font-size: 1.25rem; font-weight: 650; }
+  kbd { display: inline-block; padding: 1px 7px; border: 1px solid var(--key-edge); border-bottom-width: 2px; border-radius: 6px; background: var(--key); font-size: 0.85em; color: var(--key-text); }
+  .note { color: var(--muted); font-size: 0.92rem; margin: 14px 0 0; }
 
-  /* Tabs (segmented control) */
-  .seg { display: inline-flex; padding: 3px; border-radius: 9px; background: var(--soft); border: 1px solid var(--line); gap: 2px; }
-  .seg button {
-    border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.9rem;
-    padding: 5px 12px; border-radius: 7px; cursor: pointer;
-  }
-  .seg button[aria-selected="true"] { background: var(--bg); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+  /* Tabs */
+  .seg { display: inline-flex; padding: 4px; border-radius: 11px; background: var(--soft); border: 1px solid var(--line); gap: 2px; flex-wrap: wrap; }
+  .seg button { border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.92rem; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
+  .seg button[aria-selected="true"] { background: var(--card); color: var(--fg); box-shadow: var(--shadow); font-weight: 550; }
 
   /* Install */
-  .cmd { display: flex; align-items: stretch; margin: 14px 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); overflow: hidden; }
-  .cmd pre { margin: 0; padding: 12px 14px; flex: 1; min-width: 0; overflow-x: auto; font-size: 0.85rem; white-space: pre; }
-  .btn {
-    border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: inherit; font-size: 0.85rem;
-    padding: 6px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;
-  }
-  .btn:hover { border-color: var(--muted); }
-  .cmd .btn { border: 0; border-left: 1px solid var(--line); border-radius: 0; padding: 0 14px; background: transparent; }
-  .note { color: var(--muted); font-size: 0.9rem; }
-  .dl { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 6px; font-size: 0.9rem; }
+  .install { display: grid; grid-template-columns: 1.35fr 1fr; gap: 24px; margin-top: 24px; }
+  .card { border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 24px; min-width: 0; }
+  .card h3 { font-size: 1.02rem; margin: 0 0 4px; }
+  .card .hint { color: var(--muted); font-size: 0.9rem; margin: 0 0 14px; }
+  .cmd { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); overflow: hidden; }
+  .cmd pre { margin: 0; padding: 12px 14px; flex: 1; min-width: 0; overflow-x: auto; font-size: 0.82rem; white-space: pre; }
+  .cmd button { border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--fg); font: inherit; font-size: 0.85rem; padding: 0 14px; cursor: pointer; }
+  .cmd button:hover { background: var(--card); }
+  ol.steps { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  ol.steps li { counter-increment: s; position: relative; padding: 0 0 12px 36px; font-size: 0.93rem; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; font-weight: 700; display: grid; place-items: center; }
+  .dl-list { display: flex; flex-direction: column; gap: 10px; }
+  .dl-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; color: var(--fg); }
+  .dl-item:hover { text-decoration: none; border-color: var(--accent); }
+  .dl-item small { display: block; color: var(--muted); font-size: 0.82rem; }
+  .dl-item .arrow { color: var(--accent); font-weight: 700; }
+  .meta { margin-top: 14px; font-size: 0.85rem; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+  details { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+  summary { cursor: pointer; font-size: 0.92rem; color: var(--muted); }
+  details .cmd { margin-top: 12px; }
 
   /* Converter */
-  .conv { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: start; }
+  .conv { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: start; margin-top: 24px; }
   .pane { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   .pane .seg { align-self: flex-start; }
   textarea {
-    width: 100%; min-height: 220px; resize: vertical; padding: 12px 14px; font-size: 1rem; line-height: 1.5;
-    font-family: inherit; color: var(--fg); background: var(--bg);
-    border: 1px solid var(--line); border-radius: 10px; outline: none;
+    width: 100%; min-height: 230px; resize: vertical; padding: 14px 16px; font: inherit; font-size: 1.02rem; line-height: 1.55;
+    color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 14px; outline: none;
   }
-  textarea:focus { border-color: var(--accent); }
+  textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
   textarea[readonly] { background: var(--soft); }
-  .swap { margin-top: 40px; width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 1rem; }
-  .pane-foot { display: flex; justify-content: flex-end; }
+  .swap { margin-top: 48px; width: 40px; height: 40px; padding: 0; justify-content: center; border-radius: 50%; font-size: 1.05rem; }
+  .pane-foot { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--muted); }
 
-  footer { padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 10px; }
+  details.qa { margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  details.qa summary { list-style: none; padding: 16px 44px 16px 18px; color: var(--fg); font-weight: 550; position: relative; }
+  details.qa summary::-webkit-details-marker { display: none; }
+  details.qa summary::after { content: "+"; position: absolute; right: 18px; top: 13px; font-size: 1.3rem; color: var(--muted); }
+  details.qa[open] summary::after { content: "−"; }
+  details.qa p { margin: 0; padding: 0 18px 16px; color: var(--muted); font-size: 0.95rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 0.88rem; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 820px) {
+    .features { grid-template-columns: 1fr; }
+    .install { grid-template-columns: 1fr; }
+    .nav a.link { display: none; }
+  }
   @media (max-width: 640px) {
-    main { padding-top: 36px; }
+    section { padding: 52px 0; }
+    .hero { padding: 52px 0 44px; }
     .conv { grid-template-columns: 1fr; }
     .swap { margin: 0 auto; transform: rotate(90deg); }
     textarea { min-height: 150px; }
-    .seg button { padding: 5px 9px; }
-    .keys td:first-child { width: auto; }
-    .keys th, .keys td { padding: 9px 6px; }
+    .k { width: 26px; height: 34px; padding: 3px 4px; font-size: 0.68rem; border-radius: 6px; }
+    .k.hi .alt { font-size: 0.85rem; right: 3px; bottom: 1px; }
+    .row, .kb { gap: 4px; }
+    .kb { padding: 10px; }
+    .row:nth-child(2) { padding-left: 10px; }
+    .row:nth-child(3) { padding-left: 20px; }
+    .seg button { padding: 6px 10px; }
+    .card { padding: 18px; }
   }
 </style>
 </head>
 <body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="logo">UZ</span>Özbekça klaviatura</a>
+    <nav class="nav">
+      <a class="link" href="#keys">Tugmalar</a>
+      <a class="link" href="#install">Örnatiş</a>
+      <a class="link" href="#convert">Konvertor</a>
+      <a class="link" href="#faq">Savollar</a>
+      <a class="star" href="https://github.com/khudoyshukur/uzbek-keyboard" aria-label="GitHubda yulduzça qöying">
+        <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>Star</span>
+        <span class="count" id="stars">–</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
 <main>
-  <header>
-    <h1>Özbekça klaviatura</h1>
-    <p class="lead">Yangi özbek lotin alifbosi uçun klaviatura: <b>Ö ö, Ğ ğ, Ş ş, Ç ç</b> va tutuq belgisi <b>ʼ</b>.
-      Asosi odatiy US QWERTY. Bepul va oçiq kodli.</p>
-  </header>
+  <div class="hero wrap">
+    <div class="pill"><b>●</b> macOS · Windows · Linux <span id="ver"></span></div>
+    <h1>Yangi özbek alifbosini<br><em>oddiy klaviaturada</em> yozing</h1>
+    <p class="lead">Ö, Ğ, Ş, Ç va ʼ harflari uçun klaviatura. Odatiy US QWERTY, faqat <kbd>⌥ Option</kbd> yoki <kbd>AltGr</kbd> bilan beş harf qöşiladi.</p>
+    <div class="cta">
+      <a class="btn primary" href="#install" id="hero-dl">Yuklab oliş</a>
+      <a class="btn" href="#convert">Konvertorni oçiş</a>
+    </div>
+
+    <div class="kb" aria-label="Klaviatura: O, G, S, C va apostrof tugmalari yangi harflarni beradi">
+      <div class="row" id="r1"></div>
+      <div class="row" id="r2"></div>
+      <div class="row" id="r3"></div>
+      <div class="mods"><span class="k mod">⌥ Option</span> yoki <span class="k mod">AltGr</span> + belgilangan tugma</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap features">
+      <div class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></div>
+        <h3>Odatiy klaviatura</h3>
+        <p>Asosi US QWERTY. Siz bilgan tugmalar özgarmaydi, faqat beş harf qöşiladi.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
+        <h3>Fonda dastur yöq</h3>
+        <p>Bu tizimning öz klaviatura fayli. Heç narsa işlab turmaydi, internet kerak emas.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div>
+        <h3>Bitta buyruq bilan</h3>
+        <p>macOS, Windows va Linux uçun. Bepul va oçiq kodli, MIT litsenziyasi.</p>
+      </div>
+    </div>
+  </section>
 
   <section id="keys">
-    <h2>Qanday yoziladi</h2>
-    <table class="keys">
-      <thead><tr><th>Harf</th><th>macOS</th><th>Windows / Linux</th></tr></thead>
-      <tbody>
-        <tr><td>ö Ö</td><td><kbd>⌥</kbd> <kbd>O</kbd></td><td><kbd>AltGr</kbd> <kbd>O</kbd></td></tr>
-        <tr><td>ğ Ğ</td><td><kbd>⌥</kbd> <kbd>G</kbd></td><td><kbd>AltGr</kbd> <kbd>G</kbd></td></tr>
-        <tr><td>ş Ş</td><td><kbd>⌥</kbd> <kbd>S</kbd></td><td><kbd>AltGr</kbd> <kbd>S</kbd></td></tr>
-        <tr><td>ç Ç</td><td><kbd>⌥</kbd> <kbd>C</kbd></td><td><kbd>AltGr</kbd> <kbd>C</kbd></td></tr>
-        <tr><td>ʼ</td><td><kbd>⌥</kbd> <kbd>'</kbd></td><td><kbd>AltGr</kbd> <kbd>'</kbd></td></tr>
-      </tbody>
-    </table>
-    <p class="note" style="margin-top:12px">Katta harf uçun <kbd>⇧ Shift</kbd> ni ham bosing. Windowsda <kbd>AltGr</kbd> örniga <kbd>Ctrl</kbd> + <kbd>Alt</kbd> ham işlaydi.</p>
+    <div class="wrap">
+      <h2>Qanday yoziladi</h2>
+      <p class="sub">Harf tugmasini <kbd>⌥ Option</kbd> (macOS) yoki <kbd>AltGr</kbd> (Windows, Linux) bilan birga bosing.</p>
+      <table class="keys">
+        <thead><tr><th>Harf</th><th>macOS</th><th>Windows / Linux</th></tr></thead>
+        <tbody>
+          <tr><td>ö Ö</td><td><kbd>⌥</kbd> <kbd>O</kbd></td><td><kbd>AltGr</kbd> <kbd>O</kbd></td></tr>
+          <tr><td>ğ Ğ</td><td><kbd>⌥</kbd> <kbd>G</kbd></td><td><kbd>AltGr</kbd> <kbd>G</kbd></td></tr>
+          <tr><td>ş Ş</td><td><kbd>⌥</kbd> <kbd>S</kbd></td><td><kbd>AltGr</kbd> <kbd>S</kbd></td></tr>
+          <tr><td>ç Ç</td><td><kbd>⌥</kbd> <kbd>C</kbd></td><td><kbd>AltGr</kbd> <kbd>C</kbd></td></tr>
+          <tr><td>ʼ</td><td><kbd>⌥</kbd> <kbd>'</kbd></td><td><kbd>AltGr</kbd> <kbd>'</kbd></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Katta harf uçun <kbd>⇧ Shift</kbd> ni ham bosing. Windowsda <kbd>AltGr</kbd> örniga <kbd>Ctrl</kbd> + <kbd>Alt</kbd> ham işlaydi.</p>
+    </div>
   </section>
 
   <section id="install">
-    <h2>Örnatiş</h2>
-    <div class="seg" role="tablist" id="os-tabs">
-      <button role="tab" data-os="mac">macOS</button>
-      <button role="tab" data-os="win">Windows</button>
-      <button role="tab" data-os="linux">Linux</button>
+    <div class="wrap">
+      <h2>Örnatiş</h2>
+      <p class="sub">Tizimingizni tanlang. Eng oson yöli: bitta buyruq.</p>
+      <div class="seg" role="tablist" id="os-tabs">
+        <button role="tab" data-os="mac">macOS</button>
+        <button role="tab" data-os="win">Windows</button>
+        <button role="tab" data-os="linux">Linux</button>
+      </div>
+
+      <div class="install">
+        <div class="card">
+          <h3>Tez usul</h3>
+          <p class="hint" id="os-where"></p>
+          <div class="cmd"><pre id="cmd-text"></pre><button type="button" data-copy="cmd-text">Nusxalaş</button></div>
+          <ol class="steps" id="os-steps"></ol>
+          <details>
+            <summary>Qanday öçiriladi?</summary>
+            <div class="cmd"><pre id="un-text"></pre><button type="button" data-copy="un-text">Nusxalaş</button></div>
+          </details>
+        </div>
+        <div class="card">
+          <h3>Yoki faylni yuklab oling</h3>
+          <p class="hint" id="dl-hint"></p>
+          <div class="dl-list" id="downloads"></div>
+          <div class="meta"><span id="dl-ver"></span><a id="guide" href="#">Batafsil yöriqnoma →</a></div>
+        </div>
+      </div>
     </div>
-    <div class="cmd">
-      <pre id="cmd-text"></pre>
-      <button class="btn" id="cmd-copy" type="button">Nusxalaş</button>
-    </div>
-    <p class="note" id="cmd-note"></p>
-    <div class="dl" id="downloads"></div>
   </section>
 
   <section id="convert">
-    <h2>Konvertor</h2>
-    <div class="conv">
-      <div class="pane">
-        <div class="seg" role="tablist" id="from-tabs"></div>
-        <textarea id="src" spellcheck="false" placeholder="Matnni bu yerga yozing yoki qöying…" aria-label="Asl matn"></textarea>
-      </div>
-      <button class="btn swap" id="swap" type="button" title="Almaştiriş" aria-label="Almaştiriş">⇄</button>
-      <div class="pane">
-        <div class="seg" role="tablist" id="to-tabs"></div>
-        <textarea id="dst" readonly spellcheck="false" aria-label="Natija"></textarea>
-        <div class="pane-foot"><button class="btn" id="dst-copy" type="button">Nusxalaş</button></div>
+    <div class="wrap">
+      <h2>Kirill ↔ Lotin ↔ Yangi lotin konvertori</h2>
+      <p class="sub">Matnni kirilldan lotinga, lotindan yangi alifboga yoki teskarisiga bir zumda ögiring. Bepul, röyxatdan ötiş şart emas, matningiz heç qayerga yuborilmaydi.</p>
+      <div class="conv">
+        <div class="pane">
+          <div class="seg" role="tablist" id="from-tabs"></div>
+          <textarea id="src" spellcheck="false" placeholder="Matnni bu yerga yozing yoki qöying…" aria-label="Asl matn"></textarea>
+          <div class="pane-foot"><span id="count"></span><button class="btn small" id="clear" type="button">Tozalaş</button></div>
+        </div>
+        <button class="btn swap" id="swap" type="button" title="Almaştiriş" aria-label="Almaştiriş">⇄</button>
+        <div class="pane">
+          <div class="seg" role="tablist" id="to-tabs"></div>
+          <textarea id="dst" readonly spellcheck="false" aria-label="Natija"></textarea>
+          <div class="pane-foot"><span></span><button class="btn small" id="dst-copy" type="button">Nusxalaş</button></div>
+        </div>
       </div>
     </div>
   </section>
-
-  <footer>
-    <a href="https://github.com/khudoyshukur/uzbek-keyboard">GitHub</a> · MIT litsenziyasi
-  </footer>
+<section id="faq">
+    <div class="wrap">
+      <h2>Köp beriladigan savollar</h2>
+      <p class="sub">Yangi alifbo, konvertor va klaviatura haqida.</p>
+      <div class="faq">
+        <details class="qa"><summary>Yangi özbek lotin alifbosi nima?</summary><p>Yangi alifbo loyihasida oʻ, gʻ, sh va ch örniga bitta belgili ö, ğ, ş va ç harflari taklif qilingan. Masalan: «Oʻzbekiston» → «Özbekiston», «shahar» → «şahar», «choy» → «çoy».</p></details>
+        <details class="qa"><summary>Kirill matnni lotinga qanday ögiraman?</summary><p>Yuqoridagi konvertorda çap tomonda Kirill ni, öng tomonda Lotin yoki Yangi lotin ni tanlang va matnni qöying. Natija darhol çiqadi, uni bir tugma bilan nusxalaş mumkin. Teskarisi, yaʼni lotindan kirillga ögiriş ham işlaydi.</p></details>
+        <details class="qa"><summary>Oʻ va gʻ ni oddiy apostrof bilan (o&#x27;, g&#x27;) yozsam böladimi?</summary><p>Ha. Konvertor o&#x27;, g&#x27;, oʻ, o‘, o’ kabi barça apostrof turlarini tuşunadi va ularni tögri harfga aylantiradi.</p></details>
+        <details class="qa"><summary>Ö, ğ, ş, ç harflarini kompyuterda qanday yozaman?</summary><p>Bu saytdagi klaviaturani örnating. Keyin harf tugmasini ⌥ Option (macOS) yoki AltGr (Windows, Linux) bilan birga bosing: ⌥ O → ö, ⌥ G → ğ, ⌥ S → ş, ⌥ C → ç.</p></details>
+        <details class="qa"><summary>Telefonda işlaydimi?</summary><p>Klaviatura kompyuterlar uçun: macOS, Windows va Linux. Konvertor esa telefon brauzerida ham işlaydi.</p></details>
+        <details class="qa"><summary>Bu bepulmi?</summary><p>Ha, butunlay bepul va oçiq kodli (MIT litsenziyasi). Matningiz heç qayerga yuborilmaydi, ögiriş brauzerning özida bajariladi.</p></details>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>Özbekça klaviatura · MIT litsenziyasi</span>
+    <span><a href="https://github.com/khudoyshukur/uzbek-keyboard">GitHub</a> · <a href="https://github.com/khudoyshukur/uzbek-keyboard/issues">Taklif yoki xato</a></span>
+  </div>
+</footer>
 
 <script src="convert.js"></script>
 <script>
 (function () {
   var REPO = 'khudoyshukur/uzbek-keyboard';
+  var GH = 'https://github.com/' + REPO;
   var RAW = 'https://raw.githubusercontent.com/' + REPO + '/main/';
-
+  function $(id) { return document.getElementById(id); }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
   function copy(text, btn) {
     var done = function () { var t = btn.textContent; btn.textContent = 'Nusxalandi ✓'; setTimeout(function () { btn.textContent = t; }, 1400); };
-    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
-    else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, function () {});
+    else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done(); }
   }
-  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  // ---------- Keyboard drawing ----------
+  var ALT = { o: 'ö', g: 'ğ', s: 'ş', c: 'ç', "'": 'ʼ' };
+  [['qwertyuiop', 'r1'], ["asdfghjkl;'", 'r2'], ['zxcvbnm,./', 'r3']].forEach(function (r) {
+    var el = $(r[1]);
+    r[0].split('').forEach(function (ch) {
+      var k = document.createElement('span');
+      k.className = 'k' + (ALT[ch] ? ' hi' : '');
+      k.innerHTML = (ch === "'" ? "'" : ch.toUpperCase()) + (ALT[ch] ? '<span class="alt">' + ALT[ch] + '</span>' : '');
+      el.appendChild(k);
+    });
+  });
+
+  // ---------- GitHub stars and release ----------
+  fetch('https://api.github.com/repos/' + REPO).then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j) $('stars').textContent = j.stargazers_count.toLocaleString('en'); }).catch(function () {});
 
   // ---------- Install ----------
   var OS = {
-    mac: { cmd: 'curl -fsSL ' + RAW + 'macos/install.sh | bash',
-           note: '<b>Terminal</b> ilovasini oçing va buyruqni qöying. Oxirida tizimdan çiqib qayta kiring.',
-           files: [['.pkg installer', /macOS.*\.pkg$/], ['.zip', /macOS.*\.zip$/]] },
-    win: { cmd: 'irm ' + RAW + 'windows/get.ps1 | iex',
-           note: '<b>PowerShell</b> ni oçing va buyruqni qöying. Administrator ruxsati söraladi.',
-           files: [['.zip', /Windows.*\.zip$/]] },
-    linux: { cmd: 'curl -fsSL ' + RAW + 'linux/install.sh | sh',
-             note: 'Terminalda işga tuşiring, keyin tizimdan çiqib qayta kiring.',
-             files: [['.tar.gz', /Linux.*\.tar\.gz$/]] }
+    mac: {
+      name: 'macOS', where: '<b>Terminal</b> ilovasini oçing (⌘ Space → “Terminal”) va buyruqni qöying.',
+      cmd: 'curl -fsSL ' + RAW + 'macos/install.sh | bash',
+      un: 'curl -fsSL ' + RAW + 'macos/install.sh | bash -s -- --uninstall',
+      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', 'Oxirida tizimdan çiqib qayta kiriş taklif qilinadi: <b>ha</b> deb yozing.', 'Qayta kirgaç <kbd>fn</kbd> / <kbd>🌐</kbd> bilan <b>Uzbek Latin</b> (UZ) ni tanlang.'],
+      dlHint: 'Apple tomonidan imzolangan va tekşirilgan installer.',
+      files: [['Installer (.pkg)', 'Ikki marta bosing va körsatmalarga amal qiling', /macOS.*\.pkg$/], ['Arxiv (.zip)', '~/Library/Keyboard Layouts ga qölda joylaş uçun', /macOS.*\.zip$/]],
+      guide: 'docs/macos.md'
+    },
+    win: {
+      name: 'Windows', where: '<b>Start</b> → “PowerShell” ni oçing va buyruqni qöying (siçqonçaning öng tugmasi).',
+      cmd: 'irm ' + RAW + 'windows/get.ps1 | iex',
+      un: '& ([scriptblock]::Create((irm ' + RAW + 'windows/get.ps1))) -Uninstall',
+      steps: ['Buyruqni nusxalang va PowerShellga qöyib, Enter bosing.', 'Administrator ruxsati söralganda <b>Yes</b> ni bosing.', '<kbd>Win</kbd> + <kbd>Space</kbd> bilan <b>Uzbek Latin</b> ni tanlang.'],
+      dlHint: 'Arxivni oçing va install.cmd ni ikki marta bosing.',
+      files: [['Arxiv (.zip)', 'Extract All → install.cmd', /Windows.*\.zip$/]],
+      guide: 'docs/windows.md'
+    },
+    linux: {
+      name: 'Linux', where: 'Terminalni oçing va buyruqni qöying. Administrator huquqi kerak emas.',
+      cmd: 'curl -fsSL ' + RAW + 'linux/install.sh | sh',
+      un: 'curl -fsSL ' + RAW + 'linux/install.sh | sh -s -- --uninstall',
+      steps: ['Buyruqni nusxalang va Terminalga qöyib, Enter bosing.', 'Tizimdan çiqib qayta kiring.', 'Klaviaturalar röyxatidan <b>Uzbek Latin</b> ni tanlang. <b>AltGr</b> bu öng Alt tugmasi.'],
+      dlHint: 'Arxivni oçing va içidagi install.sh ni işga tuşiring.',
+      files: [['Arxiv (.tar.gz)', 'tar -xzf … && sh install.sh', /Linux.*\.tar\.gz$/]],
+      guide: 'docs/linux.md'
+    }
   };
-  var assets = null, current = 'mac';
+  var release = null, current;
   var osTabs = document.querySelectorAll('#os-tabs button');
 
   function showOS(os) {
-    current = os;
+    current = os; var o = OS[os];
     osTabs.forEach(function (b) { b.setAttribute('aria-selected', b.dataset.os === os); });
-    document.getElementById('cmd-text').textContent = OS[os].cmd;
-    document.getElementById('cmd-note').innerHTML = OS[os].note;
-    var dl = document.getElementById('downloads'), html = '';
-    if (assets) {
-      OS[os].files.forEach(function (f) {
-        var a = assets.list.filter(function (x) { return f[1].test(x.name); })[0];
-        if (a) html += '<a href="' + a.browser_download_url + '">Yuklab oliş: ' + f[0] + '</a>';
-      });
-      html += '<span class="note">Versiya ' + assets.tag.replace(/^v/, '') + '</span>';
-    }
-    html += '<a href="https://github.com/' + REPO + '/releases/latest">Barça fayllar</a>';
-    dl.innerHTML = html;
+    $('os-where').innerHTML = o.where;
+    $('cmd-text').textContent = o.cmd;
+    $('un-text').textContent = o.un;
+    $('os-steps').innerHTML = o.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+    $('dl-hint').textContent = o.dlHint;
+    $('guide').href = GH + '/blob/main/' + o.guide;
+    var html = '';
+    o.files.forEach(function (f) {
+      var a = release && release.assets.filter(function (x) { return f[2].test(x.name); })[0];
+      var href = a ? a.browser_download_url : GH + '/releases/latest';
+      var size = a ? ' · ' + Math.max(1, Math.round(a.size / 1024)) + ' KB' : '';
+      html += '<a class="dl-item" href="' + href + '"><span>' + f[0] + '<small>' + f[1] + size + '</small></span><span class="arrow">↓</span></a>';
+    });
+    $('downloads').innerHTML = html;
+    $('dl-ver').textContent = release ? 'Versiya ' + release.tag_name.replace(/^v/, '') : '';
+    $('hero-dl').textContent = 'Yuklab oliş: ' + o.name;
   }
   osTabs.forEach(function (b) { b.addEventListener('click', function () { showOS(b.dataset.os); }); });
-  document.getElementById('cmd-copy').addEventListener('click', function () { copy(OS[current].cmd, this); });
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () { copy($(b.dataset.copy).textContent, b); });
+  });
+  $('hero-dl').addEventListener('click', function () { showOS(current); });
 
   var ua = navigator.userAgent;
-  showOS(/Windows/.test(ua) ? 'win' : /Linux|X11/.test(ua) && !/Android/.test(ua) ? 'linux' : 'mac');
+  showOS(/Windows/.test(ua) ? 'win' : /Linux|X11|CrOS/.test(ua) && !/Android/.test(ua) ? 'linux' : 'mac');
 
-  fetch('https://api.github.com/repos/' + REPO + '/releases/latest')
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (j) { if (j && j.assets) { assets = { tag: j.tag_name, list: j.assets }; showOS(current); } })
-    .catch(function () {});
+  fetch('https://api.github.com/repos/' + REPO + '/releases/latest').then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (!j || !j.assets) return;
+      release = j; showOS(current);
+      $('ver').textContent = '· v' + j.tag_name.replace(/^v/, '');
+    }).catch(function () {});
 
   // ---------- Converter ----------
   var SCRIPTS = [['cyr', 'Kirill'], ['lat', 'Lotin'], ['new', 'Yangi lotin']];
-  var EXAMPLE = { cyr: 'Ўзбекистон — менинг ватаним. Ғалаба, шаҳар, чиройли.', lat: '', new: '' };
   var from = store('uz-from') || 'cyr', to = store('uz-to') || 'new';
-  var src = document.getElementById('src'), dst = document.getElementById('dst');
+  var src = $('src'), dst = $('dst');
 
   function tabs(id, get, set) {
-    var el = document.getElementById(id);
+    var el = $(id);
     SCRIPTS.forEach(function (s) {
       var b = document.createElement('button');
       b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.s = s[0]; b.textContent = s[1];
@@ -227,15 +548,16 @@
   function render() {
     paintFrom(); paintTo();
     dst.value = UzConvert.convert(src.value, from, to);
+    $('count').textContent = src.value.length ? src.value.length + ' belgi' : '';
   }
   src.addEventListener('input', render);
-  document.getElementById('swap').addEventListener('click', function () {
+  $('swap').addEventListener('click', function () {
     var t = from; from = to; to = t; store('uz-from', from); store('uz-to', to);
     src.value = dst.value; render(); src.focus();
   });
-  document.getElementById('dst-copy').addEventListener('click', function () { copy(dst.value, this); });
+  $('clear').addEventListener('click', function () { src.value = ''; render(); src.focus(); });
+  $('dst-copy').addEventListener('click', function () { copy(dst.value, this); });
 
-  src.value = UzConvert.convert(EXAMPLE.cyr, 'cyr', from);
   render();
 })();
 </script>
