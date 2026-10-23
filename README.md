@@ -5,7 +5,7 @@ Yangi özbek lotin alifbosi uçun klaviatura: **Ö ö, Ğ ğ, Ş ş, Ç ç** va 
 Sayt va Kirill ↔ Lotin ↔ Yangi lotin konvertori: **[uzbek-keyboard.safix.uz](https://uzbek-keyboard.safix.uz)**
 
 - Asosi odatiy **US QWERTY**, yaʼni siz bilgan tugmalar özgarmaydi.
-- Harfni **Option ⌥** (macOS) yoki **AltGr / öng Alt** (Windows, Linux) bilan birga bosasiz.
+- Harfni **Option ⌥** (macOS) yoki **öng tarafdagi Alt** (Windows, Linux) bilan birga bosasiz.
 - Fonda heç qanday dastur işlamaydi. Bu tizimning öz klaviatura fayli.
 
 [![Build](https://github.com/khudoyshukur/uzbek-keyboard/actions/workflows/build.yml/badge.svg)](https://github.com/khudoyshukur/uzbek-keyboard/actions/workflows/build.yml)
@@ -14,13 +14,13 @@ Sayt va Kirill ↔ Lotin ↔ Yangi lotin konvertori: **[uzbek-keyboard.safix.uz]
 
 | Harf | macOS | Windows / Linux |
 |:---:|---|---|
-| **ö  Ö** | `⌥ O`  ·  `⌥ ⇧ O` | `AltGr O`  ·  `AltGr ⇧ O` |
-| **ğ  Ğ** | `⌥ G`  ·  `⌥ ⇧ G` | `AltGr G`  ·  `AltGr ⇧ G` |
-| **ş  Ş** | `⌥ S`  ·  `⌥ ⇧ S` | `AltGr S`  ·  `AltGr ⇧ S` |
-| **ç  Ç** | `⌥ C`  ·  `⌥ ⇧ C` | `AltGr C`  ·  `AltGr ⇧ C` |
-| **ʼ** | `⌥ '` | `AltGr '` |
+| **ö  Ö** | `⌥ O`  ·  `⌥ ⇧ O` | `öng Alt O`  ·  `öng Alt ⇧ O` |
+| **ğ  Ğ** | `⌥ G`  ·  `⌥ ⇧ G` | `öng Alt G`  ·  `öng Alt ⇧ G` |
+| **ş  Ş** | `⌥ S`  ·  `⌥ ⇧ S` | `öng Alt S`  ·  `öng Alt ⇧ S` |
+| **ç  Ç** | `⌥ C`  ·  `⌥ ⇧ C` | `öng Alt C`  ·  `öng Alt ⇧ C` |
+| **ʼ** | `⌥ '` | `öng Alt '` |
 
-Caps Lock yoqilgan bölsa, katta harf çiqadi. Windowsda `AltGr` örniga `Ctrl + Alt` ham işlaydi.
+Caps Lock yoqilgan bölsa, katta harf çiqadi. Windowsda `öng Alt` örniga `Ctrl + Alt` ham işlaydi.
 
 ## Örnatiş
 

@@ -78,7 +78,7 @@ fi
 cat <<EOF
 
 Tizimdan çiqib qayta kiring, keyin "Uzbek Latin" ni tanlang.
-  AltGr (öng Alt) + o → ö   g → ğ   s → ş   c → ç   ' → ʼ   (Shift bilan — katta harf)
+  öng Alt + o → ö   g → ğ   s → ş   c → ç   ' → ʼ   (Shift bilan — katta harf)
 
 GNOME bölmasa:
   KDE Plasma:  System Settings → Keyboard → Layouts → Add → Uzbek Latin

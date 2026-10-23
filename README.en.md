@@ -3,7 +3,7 @@
 A keyboard layout for the updated Uzbek Latin alphabet: **Ö ö, Ğ ğ, Ş ş, Ç ç** and the apostrophe **ʼ** (U+02BC).
 
 Website and Cyrillic ↔ Latin ↔ new Latin converter: **[uzbek-keyboard.safix.uz](https://uzbek-keyboard.safix.uz)**
-It's standard US QWERTY. Hold **Option ⌥** (macOS) or **AltGr / Right Alt** (Windows, Linux) and press `o g s c '`. Add Shift for capitals.
+It's standard US QWERTY. Hold **Option ⌥** (macOS) or **Right Alt** (Windows, Linux) and press `o g s c '`. Add Shift for capitals.
 
 ## Install
 

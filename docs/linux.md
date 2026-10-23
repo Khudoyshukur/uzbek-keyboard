@@ -11,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/khudoyshukur/uzbek-keyboard/main/li
 Skript klaviaturani joriy foydalanuvçi uçun örnatadi. GNOME'da u klaviaturalar röyxatiga avtomatik qöşiladi.
 Keyin tizimdan çiqib qayta kiring va **Uzbek Latin** ni tanlang.
 
-**AltGr** bu klaviaturadagi **öng Alt** tugmasi.
+Harflar klaviaturaning **öng tarafidagi Alt** tugmasi bilan yoziladi.
 
 ## Boşqa muhitlar
 

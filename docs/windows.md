@@ -27,7 +27,7 @@
 Tizimdan çiqib qayta kiring. Baribir körinmasa: **Settings → Time & language → Language & region → Uzbek (Latin) → ⋯ → Language options → Add a keyboard → Uzbek Latin**.
 
 **Ayrim dasturlarda Ctrl + Alt + O/G/S/C qisqa tugmalari işlamayapti.**
-Bu barça AltGr klaviaturalarida şunday, çunki bu tugmalar harf yoziş uçun band.
+Öng Alt bilan harf yoziladigan barça klaviaturalarda şunday, çunki bu tugmalar harf yoziş uçun band.
 
 **Windows on ARM** (masalan, Snapdragon noutbuklar) hozirça qöllab-quvvatlanmaydi.
 
