@@ -27,7 +27,7 @@ jobs:
       - name: Layout checks (incl. Apple DTD validation)
         run: python3 tests/check_layouts.py
       - name: Import Developer ID Installer certificate
-        if: startsWith(github.ref, 'refs/tags/v') && env.MACOS_CERT_P12 != ''
+        if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && env.MACOS_CERT_P12 != ''
         run: |
           KC="$RUNNER_TEMP/signing.keychain-db"; KP=$(uuidgen)
           security create-keychain -p "$KP" "$KC"
@@ -41,7 +41,7 @@ jobs:
           id=$(security find-identity -v "$KC" | sed -n 's/.*"\(Developer ID Installer: .*\)"/\1/p' | head -1)
           test -n "$id"
           echo "PKG_SIGN_IDENTITY=$id" >> "$GITHUB_ENV"
-      - name: Build .zip and .pkg (signed + notarized on release tags)
+      - name: Build .zip and .pkg (signed + notarized on release tags and manual runs)
         run: ./macos/build.sh
       - name: No macOS metadata files in the package
         run: |
